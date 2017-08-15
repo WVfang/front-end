@@ -1,2 +1,0 @@
-I told you
-NAT!
