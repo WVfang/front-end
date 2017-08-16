@@ -76,25 +76,6 @@ body {
 }
 
 /*
-  ========================================
-  Clearfix
-  ========================================
-*/
-
-.group:before,
-.group:after {v
-  content: "";
-  display: table;
-}
-.group:after {
-  clear: both;
-}
-.group {
-  clear: both;
-  *zoom: 1;
-}
-
-/*
 	==============================
 	Rows
 	==============================
@@ -120,12 +101,7 @@ h2, h3, p {
 	margin-bottom: 22px;
 }
 
-h2 {
-	font-size: 22px;
-	font-weight: 400;
-}
-
-h3 {
+h2, h3 {
 	font-size: 22px;
 	font-weight: 400;
 }
@@ -151,6 +127,32 @@ a {
 	display: inline-block;
 	width: 33.33%;
 	text-align: center;
+	color: #808080;
+}
+
+/*
+	==============================
+	Buttons
+	==============================
+*/
+
+.btn {
+	padding: 5px 15px;
+	font-size: 17px;
+	color: #fff;
+	border: 2px solid #fff;
+	border-radius: 5px;
+}
+
+.btn-footer {
+	font-size: 18px;
+	font-weight: 400;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.btn:hover {
+	background: #fff;
 	color: #808080;
 }
 
@@ -221,9 +223,9 @@ a {
 }
 
 .introduction-img {
-	clear: left;
 	width: 50%;
 	margin: 68px 0;
+	clear: left;
 	float: left;
 }
 
@@ -253,7 +255,7 @@ a {
 
 /*
 	==============================
-	Contact Us
+	Footer
 	==============================
 */
 
@@ -300,34 +302,8 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder { color: #a9a9a9; }
 input::-moz-input-placeholder,
 textarea::-moz-input-placeholder { color: #a9a9a9; }
+
 /*Удаление стрелочек в поле ввода номера телефона (Хром, Мозилла)*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button { -webkit-appearance: none; }
 input[type='number'] { -moz-appearance: textfield; }
-
-
-/*
-	==============================
-	Buttons
-	==============================
-*/
-
-.btn {
-	padding: 5px 15px;
-	font-size: 17px;
-	color: #fff;
-	border: 2px solid #fff;
-	border-radius: 5px;
-}
-
-.btn-footer {
-	font-size: 18px;
-	font-weight: 400;
-	padding-left: 50px;
-	padding-right: 50px;
-}
-
-.btn:hover {
-	background: #fff;
-	color: #808080;
-}
