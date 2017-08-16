@@ -1,0 +1,284 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
+  License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+	==============================
+	
+	==============================
+*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+	background: #1abc9c;
+	font: 300 14px/22px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.container,
+.grid {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.container {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group:before,
+.group:after {v
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/*
+	==============================
+	Rows
+	==============================
+*/
+
+.row {
+	min-width: 960px;
+	background: #fff;
+	padding: 10px;
+}
+
+.row-content {
+	padding: 44px 0 22px 0;
+}
+
+/*
+	==============================
+	Typography
+	==============================
+*/
+
+h1, h2, h3, p {
+	margin-bottom: 22px;
+}
+
+h1 {
+	font-size: 44px;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 22px;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 22px;
+	font-weight: 400;
+}
+
+a {
+	text-decoration: none;
+	color: #808080;
+}
+
+/*
+	==============================
+	Grid
+	==============================
+*/
+
+.grid 
+.col-one-third {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.col-one-third {
+	display: inline-block;
+	width: 33.33%;
+	text-align: center;
+	color: #808080;
+}
+
+/*
+	==============================
+	Header
+	==============================
+*/
+
+.logo {
+	float: left;
+	padding-top: 20px;
+}
+
+.primary-nav {
+	text-align: right;
+	text-transform: uppercase;
+}
+
+.primary-nav li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.primary-nav li:last-child {
+	margin-right: 0;
+}
+
+.primary-nav a {
+	color:#696969;
+}
+
+.primary-nav a:hover {
+	color:#d3d3d3;
+}
+
+/*
+	==============================
+	Introduction
+	==============================
+*/
+
+.introduction-text,
+.introduction-img {
+	display: inline-block;
+}
+
+.introduction-text {
+	width: 50%;
+	padding: 132px 0;
+	color: #fff;
+	text-align: left;
+}
+
+.introduction-text h2 {
+	font-weight: 700;
+}
+
+.introduction-text h2,
+.introduction-text p {
+	margin-bottom: 44px;
+}
+
+.introduction-img {
+	width: 50%;
+	margin: 68px 0;
+	float: left;
+}
+
+.introduction-img img{
+	height: 350px;
+	margin-left: 120px;	
+}
+
+.btn {
+	padding: 5px 15px;
+	font-size: 17px;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 5px;
+}
+
+/*
+	==============================
+	Content
+	==============================
+*/
+
+.fa {
+	padding: 25px;
+	margin-bottom: 20px;
+	background: #1abc9c;
+	color: #fff;
+	font-size: 37px;
+	border-radius: 50%;
+}
+
+.fa-android {
+	padding: 25px 30px;
+}
+
+/*
+	==============================
+	Contact Us
+	==============================
+*/
+
+footer {
+	padding: 44px 0;
+}
+
+.contact-group {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.contact-group input,
+.contact-group textarea {
+	display: block;
+}
+
+footer h2 {
+	text-align: center;
+	color: #fff;
+	font-weight: 700;
+}
