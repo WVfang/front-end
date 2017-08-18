@@ -62,7 +62,6 @@
 		timeOutput.innerHTML = zeroBeforeOneSymbol(hours) + ":" + zeroBeforeOneSymbol(minutes)
 		 + ":" + zeroBeforeOneSymbol(seconds);
 
-		
 		==============================================================================
 		Это фрагмент решения с помощью Date, который просто все усложнил и забрал кучу
 		времени, да еще и с багом (вычисления). Но все же я оставил его лежать тут.
@@ -112,3 +111,26 @@
 
 	========================================
 */
+
+var date1 = document.getElementById("input-time-1");
+var date2 = document.getElementById("input-time-2");
+var interval = document.getElementById("time-interval");
+var btnConfirm = document.getElementById("time-confirm");
+
+btnConfirm.onclick = function() {
+	var dateML1 = Date.parse(date1.value);
+	var dateML2 = Date.parse(date2.value);
+	var intervalML = (dateML2-dateML1)/1000;
+
+	console.log(intervalML);
+
+	var seconds = intervalML&60;
+	var minutes = intervalML&3600 - (intervalML/1000)&60;
+	var hours = intervalML&86400 - intervalML&3600;
+	
+	var years = Math.floor(intervalML/(365*24*60*60));
+	var months = Math.floor((intervalML - years*30*24*60*60)/(30*24*60*60));
+	var days = Math.floor((intervalML - years*30*24*60*60 - months*30*24*60*60)/(24*60*60));
+
+	interval.innerHTML = years + " years, " + months + " months, " + days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+}
