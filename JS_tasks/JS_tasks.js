@@ -29,6 +29,11 @@
 	
 	var btnCTCreate = document.getElementById("btn-CT-create");
 	btnCTCreate.onclick = function() {
+
+		while (list.firstChild) {
+			list.removeChild(list.firstChild);
+		}
+		
 		var stars = "";
 		for (var i = 0; i < 50; i++) {
 			var li = liPrefab.cloneNode(true);
@@ -191,18 +196,32 @@
    			chessBoard.removeChild(chessBoard.firstChild);
 		}
 
+		var width = "", height = "";
+		var boolean = true;
+		for (var i = 0; i < inputBoardSize.value.length; i++) {
+			if(inputBoardSize.value[i] != "x" && inputBoardSize.value[i] != "х") {
+				if(boolean) width += inputBoardSize.value[i];
+				else height += inputBoardSize.value[i];
+			}
+			else boolean = false;
+		}
+
+		while (chessBoard.firstChild){
+   			chessBoard.removeChild(chessBoard.firstChild);
+		}
+
 		var fieldColorChanger = true;
-		for (var i = 0; i < inputBoardSize.value; i++) {
+		for (var i = 0; i < height; i++) {
 			var fieldLine = document.createElement("div");
 			fieldLine.style.margin = "0";
-			for (var a = 0; a < inputBoardSize.value; a++) {
+			for (var a = 0; a < width; a++) {
 				var field = fieldPrefab.cloneNode(true);
 				if (!fieldColorChanger) field.style.background = "black";
 			
 				fieldLine.appendChild(field);
 				fieldColorChanger = !fieldColorChanger;
 			}
-			if (inputBoardSize.value%2 == 0) fieldColorChanger = !fieldColorChanger;
+			if (width%2 == 0) fieldColorChanger = !fieldColorChanger;
 			chessBoard.appendChild(fieldLine);
 		}
 		
@@ -275,9 +294,9 @@
 		else 
 			wavesCounter = 1;
 		for (var i = 0; i < wavesCounter; i++) {
-			returnWord = word.replace(part[i], '');
+			word = word.replace(part[i], '');
 		}
-		return returnWord;
+		return word;
 	}
 
 	var btnSort = document.getElementById("btn-sort-links");
