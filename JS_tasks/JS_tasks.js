@@ -118,7 +118,7 @@
 
 	var btnConfirm = document.getElementById("btn-interval-count");
 	btnConfirm.onclick = function() {
-		var intervalS = (Date.parse(dateBeginning.value) - Date.parse(dateEnding.value))/1000;
+		var intervalS = (Date.parse(dateEnding.value) - Date.parse(dateBeginning.value))/1000;
 		var interval = [Math.floor(intervalS/(365*24*60*60)) + " years, ",
 						(intervalS%(60*60*24*365) - intervalS%(60*60*24*365)%(60*60*24*30))/2592000 + " months (of 30days), ",
 						(intervalS%(60*60*24*365)%(60*60*24*30) - intervalS%(60*60*24))/86400 + " days, ", 
