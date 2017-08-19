@@ -2,37 +2,79 @@
 <html>
 <head>
 	<title>JS</title>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
 </head>
-<body>
-	<!-- 	Third task
+<body style="background: #ffebcd; text-align: center;">
+		
+		
+	 	<h1>Task 3</h1>
 
-	<ul id="list"></ul>
-	-->
-
-	<!--	Fourth task
-
-	<input id="seconds" type="number" name="seconds" placeholder="enter number of seconds">
-	<button id="button">Confirm</button>
-	time: <span id="time">00:00:00</span>
-	-->
+	<button id="btn-CT-create">Grow Christmas Tree!</button>
+	<ul id="CT-list" style="padding-left: 0"></ul>
+	<button id="btn-CT-delete">Cut down it!</button>
 	
-	<!-- 	Fifth task
+
+		<h1>Task 4</h1>
+
+	<input id="input-seconds-to-time" type="number" name="seconds" placeholder="enter number of seconds">
+	<button id="btn-seconds-to-time">Confirm</button>
+	time: <span id="seconds-in-time">00:00:00</span>
+	
+	
+	 	<h1>Task 5</h1>
 
 	<label>
-		Возраст
-		<input id="input-users-age" type="number" name="age">
+		<input id="input-users-age" type="number" name="age" placeholder="Enter your age">
 	</label>
-	<button id="age-confirm">Confirm</button>
-	
+	<button id="btn-age-confirm">Confirm</button>
 	Возраст: <span id="output-users-age"></span>
-	-->
 	
 	
-	Example: October 13 2014 11:13:00 <br>
-	<input id="input-time-1" name="date1" placeholder="Month date year hh:mm:ss">
-	<input id="input-time-2" name="date2" placeholder="Month date year hh:mm:ss">
-	<button id="time-confirm">Confirm</button>
+		<h1>Task 6</h1>
+	Example: October 13, 2014 11:13:00 and December 23, 2016 12:42:37<br>
+	<input id="input-time-beginning" name="date1" placeholder="Month date, year hh:mm:ss">
+	<input id="input-time-ending" name="date2" placeholder="Month date, year hh:mm:ss">
+	<button id="btn-interval-count">Count interval!</button>
 	Interval: <span id="time-interval"></span>
+	
+
+		<h1>Task 7</h1>
+	Example: 2014-07-19<br>
+	<input id="input-date-of-birth" name="date" placeholder="Enter your date of birth">
+	<button id="btn-zodiac-identify">Identify zodiac!</button>
+	You-re: <span id="zodiac-name"></span><br><br>
+	<img id="zodiac-image" src="">
+	
+
+	 	<h1>Task 8</h1>
+	 	Возможно некорректное отображение в Safari<br><br>
+	<input id="input-chess-board-size" type="number" name="chess-board-size" placeholder="Enter chess board size">
+	<button id="btn-chess-board-create">Create</button> <br><br>
+	<section id="chess-board" style="font-size: 0;"></section>
+	
+
+		<h1>Task 9</h1>
+	<input id="input-users-flat-number" type="number" name="users-flat-number" placeholder="Enter the number of your flat" style="width: 200px"><br><br>
+	<input id="input-buildings-total" type="number" name="builings" placeholder="Enter the number of buildings" style="width: 200px"><br>
+	<input id="input-floors-total" type="number" name="floors" placeholder="Enter the number of floors" style="width: 200px"><br>
+	<input id="input-flats-total" type="number" name="flats" placeholder="Enter the number of flats" style="width: 200px"><br><br>
+	<button id="btn-identify-users-location">Identify location!</button>
+	You're <span id="users-location"></span>
+	
+	
+	 	<h1>Task 10</h1>
+	<input id="input-number" type="number" name="number" placeholder="Enter number">
+	<button id="btn-count-numerals">Count numerals!</button>
+	Result: <span id="result"></span>
+	
+
+		<h1>Task 11</h1>
+	<p>Example: <br>https://www.google.ru, https://www.ukr.net, https://translate.google.ru, https://learn.javascript.ru</p>
+	<textarea id="input-links" style="width: 300px; height: 150px;" placeholder="Enter comma-separated links "></textarea><br>
+	<button id="btn-sort-links">Sort!</button>
+	<ul id="link-list" style="padding-left: 0;"></ul>
+
+
 
 	<script src="JS_tasks.js"></script>
 </body>
