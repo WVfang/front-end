@@ -1,0 +1,57 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#select-friend-menu {
+	display: table-cell; /*
+	vertical-align: middle;*/
+	padding: 45px 50px;
+	width: 500px;
+	height: 150px;
+	border: 0.75px solid #d3d3d3;
+	border-radius: 1px;
+	box-shadow: -0.75px 0.75px 1px rgba(169, 169, 169, 0.5);
+	font-size: 24px;
+}
+
+#friend-selected {
+	width: 100%;
+	height: 100%;
+	/*margin: auto;*/
+	border: 0.75px solid #d3d3d3;
+	border-radius: 5px;
+	color: #d3d3d3;
+	font-weight: 700;
+}
+
+/*
+	========================================
+
+	========================================
+*/
+
+#friend-selected div:first-child{
+	padding: 5px 10px;
+
+}
+
+#friend-options li {
+	float: left;
+	display: block;
+}
+
+#friend-options {
+	padding-left: 0;
+	margin: 0;
+}
+
+#friend-options li {
+	list-style: none;
+	border-bottom: 1px solid rgba(169, 169, 169, 0.5);
+}
+
+.active {background: #808080;}
