@@ -7,25 +7,22 @@
 }
 
 #select-friend-menu {
-	display: table-cell; /*
-	vertical-align: middle;*/
+	display: table-cell;
 	padding: 45px 50px;
 	width: 500px;
 	height: 150px;
 	border: 0.75px solid #d3d3d3;
 	border-radius: 1px;
 	box-shadow: -0.75px 0.75px 1px rgba(169, 169, 169, 0.5);
-	font-size: 24px;
+	
+	font: 400 20px Arial, Helvetica, sans-serif;
 }
 
-#friend-selected {
+.friend-selected {
 	width: 100%;
-	height: 100%;
-	/*margin: auto;*/
 	border: 0.75px solid #d3d3d3;
 	border-radius: 5px;
 	color: #d3d3d3;
-	font-weight: 700;
 }
 
 /*
@@ -34,14 +31,8 @@
 	========================================
 */
 
-#friend-selected div:first-child{
-	padding: 5px 10px;
-
-}
-
-#friend-options li {
-	float: left;
-	display: block;
+.friend-selected div {
+	padding: 10px;
 }
 
 #friend-options {
@@ -51,7 +42,39 @@
 
 #friend-options li {
 	list-style: none;
-	border-bottom: 1px solid rgba(169, 169, 169, 0.5);
+	color: #000;
+	margin: 5px 0;
 }
 
-.active {background: #808080;}
+#friend-options li div {
+	display: inline-block;
+}
+
+#friend-options li div:first-child {
+	margin-left: 10px;
+}
+
+#friend-options li div:last-child {
+	line-height: 1.5em;
+	vertical-align: top;
+}
+
+.image {
+	/*background: #000;
+	border-radius: 50%;*/
+	height: 50px;
+	width: 50px;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+}
+
+.friend-selected:hover div:first-child,
+#friend-options li {
+	border-bottom: 1px solid rgba(169, 169, 169, 0.1);
+}
+
+.active-background {background: rgba(169, 169, 169, 0.25);}
+.active-border {border-color: #87CEEB;}
