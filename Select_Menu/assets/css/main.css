@@ -1,25 +1,21 @@
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-#select-friend-menu {
-	display: table-cell;
-	padding: 45px 50px;
+#select-friend-border {
+	display: table;
+	padding: 0;
 	width: 500px;
 	height: 150px;
 	border: 0.75px solid #d3d3d3;
 	border-radius: 1px;
 	box-shadow: -0.75px 0.75px 1px rgba(169, 169, 169, 0.5);
-	
 	font: 400 20px Arial, Helvetica, sans-serif;
 }
 
-.friend-selected {
+.select-menu-wrapper {
 	width: 100%;
+}
+
+.select-menu {
+	width: 75%;
+	margin: 52px auto;
 	border: 0.75px solid #d3d3d3;
 	border-radius: 5px;
 	color: #d3d3d3;
@@ -27,54 +23,59 @@
 
 /*
 	========================================
-
+	
 	========================================
 */
 
-.friend-selected div {
-	padding: 10px;
+.fa {
+	float: right;
+	margin-top: -6px;
+	margin-right: 10px;
+	color: #000;
 }
 
-#friend-options {
+#chosen-option i,
+#chosen-option div,
+.friend-option div,
+.friend-option img {
+	display: inline-block;
+}
+
+#chosen-option,
+.friend-option {
+	padding: 15px;
+}
+
+#friend-total-options {
 	padding-left: 0;
 	margin: 0;
 }
 
-#friend-options li {
+.friend-option {
 	list-style: none;
 	color: #000;
-	margin: 5px 0;
 }
-
-#friend-options li div {
-	display: inline-block;
-}
-
-#friend-options li div:first-child {
+/* Левый отступ от границы */
+#chosen-option,
+.friend-option img {
 	margin-left: 10px;
 }
-
-#friend-options li div:last-child {
+/* Отступ от текста и размеры изображения */
+.friend-option img {
+	margin-right: 10px;
+	height: 30px;
+	border-radius: 50%;
+}
+/* Выравнивание текста с изображением */
+.friend-option div:last-child {
 	line-height: 1.5em;
 	vertical-align: top;
 }
-
-.image {
-	/*background: #000;
-	border-radius: 50%;*/
-	height: 50px;
-	width: 50px;
-}
-
-img {
-	width: 100%;
-	height: 100%;
-}
-
-.friend-selected:hover div:first-child,
-#friend-options li {
+/* Нижняя полупрозрачная(формально 0.1-прозрачная) полоса */
+#chosen-option,
+.friend-option {
 	border-bottom: 1px solid rgba(169, 169, 169, 0.1);
 }
-
-.active-background {background: rgba(169, 169, 169, 0.25);}
+/* jQuery классы (фон при наведении и граница при открытом списке)
+.active-background {background: rgba(169, 169, 169, 0.1);}
 .active-border {border-color: #87CEEB;}

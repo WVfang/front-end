@@ -1,14 +1,14 @@
 $(document).ready(function (){
 	$("#friend-options").hide ();
 
-	$(".friend-selected").hover (
+	$(".select-menu").hover (
 		function() {
 			$("#friend-options").show();
-			$(".friend-selected").addClass("active-border");
+			$(".select-menu").addClass("active-border");
 		},
 		function() {
 			$("#friend-options").hide();
-			$(".friend-selected").removeClass("active-border");
+			$(".select-menu").removeClass("active-border");
 		}
 	);
 
@@ -20,8 +20,8 @@ $(document).ready(function (){
 			$(this).removeClass("active-background");
 		}
 	).on("click", function() {
-		var selectedFriend = $(this).children().text();
-		console.log(selectedFriend);
-		$(".friend-selected div:first").text(selectedFriend);
+		$(".select-menu div:first").removeAttr("id").addClass("friend-option");
+		$(".select-menu div:first").children().not(".fa").remove();
+		$(this).children().clone().appendTo($(".select-menu div:first"));
 	})
 });
