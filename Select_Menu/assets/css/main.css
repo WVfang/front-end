@@ -1,21 +1,22 @@
+/* Границы, настройка шрифта */
 #select-friend-border {
 	display: table;
 	padding: 0;
 	width: 500px;
-	height: 150px;
+	height: 132px;
 	border: 0.75px solid #d3d3d3;
 	border-radius: 1px;
 	box-shadow: -0.75px 0.75px 1px rgba(169, 169, 169, 0.5);
 	font: 400 20px Arial, Helvetica, sans-serif;
 }
-
-.select-menu-wrapper {
+/* Обертка для расположения выдвижного списка по центру */
+#select-menu-wrapper {
 	width: 100%;
 }
-
-.select-menu {
+/* Поле выдвижного списка */
+#select-menu {
 	width: 75%;
-	margin: 52px auto;
+	margin: 41px auto;
 	border: 0.75px solid #d3d3d3;
 	border-radius: 5px;
 	color: #d3d3d3;
@@ -26,56 +27,56 @@
 	
 	========================================
 */
-
+/* Настройки стрелки */
 .fa {
 	float: right;
 	margin-top: -6px;
 	margin-right: 10px;
 	color: #000;
 }
-
+/* Обьявление изображений, имен и стрелки inline-block'ами для расположения на одном уровне */
 #chosen-option i,
 #chosen-option div,
 .friend-option div,
 .friend-option img {
 	display: inline-block;
 }
-
+/* Установка padding в выбранном поле и полях списка */
 #chosen-option,
 .friend-option {
-	padding: 15px;
+	padding: 12px;
 }
-
-#friend-total-options {
-	padding-left: 0;
-	margin: 0;
-}
-
-.friend-option {
-	list-style: none;
-	color: #000;
-}
-/* Левый отступ от границы */
+/* Левый отступ от границы*/
 #chosen-option,
 .friend-option img {
 	margin-left: 10px;
 }
-/* Отступ от текста и размеры изображения */
+/* Удаление стандартного padding списка и отступов */
+#friend-total-options {
+	padding-left: 0;
+	margin: 0;
+}
+/* Удаление маркера списка и установка цвета текста */
+.friend-option {
+	list-style: none;
+	color: #000;
+}
+
+/* Отступ изображения от текста и его размеры (и закругление) */
 .friend-option img {
-	margin-right: 10px;
+	margin-right: 20px;
 	height: 30px;
 	border-radius: 50%;
 }
-/* Выравнивание текста с изображением */
+/* Выравнивание текста на уровне с изображением */
 .friend-option div:last-child {
 	line-height: 1.5em;
 	vertical-align: top;
 }
-/* Нижняя полупрозрачная(формально 0.1-прозрачная) полоса */
+/* Полупрозрачная(формально 0.1-прозрачная) полоса под каждым из элементов списка */
 #chosen-option,
 .friend-option {
 	border-bottom: 1px solid rgba(169, 169, 169, 0.1);
 }
-/* jQuery классы (фон при наведении и граница при открытом списке)
+/* jQuery класс (фон при наведении) */
 .active-background {background: rgba(169, 169, 169, 0.1);}
-.active-border {border-color: #87CEEB;}
