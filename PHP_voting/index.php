@@ -3,12 +3,15 @@
 <head>
 	<title>Voting</title>
 </head>
-<body style="background: rgb(240, 230, 140);">
+<body style="background: #fffacd;">
 	<style type="text/css">
+		/* Main container */
 		#make-a-choice {
-			border: 4px solid rgb(189, 183, 107);;
 			width: 450px;
 			padding: 20px;
+			margin: 0 auto;
+			border: 4px solid rgb(189, 183, 107);
+			background: #fff;
 		}
 		#make-a-choice p, input, div {
 			font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -19,14 +22,13 @@
 			text-align: center;
 			margin: 0 auto;
 		}
-		#make-a-choice div {
+		/* Form variants */
+		#variants div {
 			display: inline-block;
 		}
-
 		#variants {
 			width: 50%;
-			margin-bottom: 20px;
-			margin-top: 20px;
+			margin: 20px auto;
 		}
 		.variant {
 			width: 100%;
@@ -40,31 +42,47 @@
 		.variant div {
 			margin: 0 10px;
 		}
+		/* Buttons */
+		.btn {
+			text-align: center;
+			background: linear-gradient(#fff, #d3d3d3);
+			border: 2px solid rgb(221, 221, 221);
+			cursor: pointer;
+			outline:none;
+		}
 		#watch-statistics {
 			width: 100px;
 			height: 25px;
 			margin-top: 50px;
 			float: right;
-			font-size: 18px;
-			text-align: center;
-			background: linear-gradient(#fff, #d3d3d3);
-			border: 1px solid #d3d3d3;
+			font-size: 18px;	
 		}
 		#watch-statistics a {
 			text-decoration: none;
+			color: #696969;
 		}
+
 	</style>
 	<div id="make-a-choice">
 		<p>Who has stolen a sausage?</p>
 		<form action="voting_result.php" method="post">
 			<div id="variants">
-				<div class="variant"><input type="radio" name="thief" value="dog" checked><div>Dog</div></div>
-				<div class="variant"><div>Rhino</div><input type="radio" name="thief" value="rhino"></div>
-				<div class="variant"><input type="radio" name="thief" value="cat"><div>Cat</div></div>
+				<div class="variant">
+					<input type="radio" name="thief" value="dog" checked><!--
+					--><div>Dog</div>
+				</div>
+				<div class="variant">
+					<div>Rhino</div><!--
+					--><input type="radio" name="thief" value="rhino">
+				</div>
+				<div class="variant">
+					<input type="radio" name="thief" value="cat"><!--
+					--><div>Cat</div>
+				</div>
 			</div>
-			<input type="submit" name="confirm" value="Make a choice!" style="display: block;">
+			<input id="btn-submit" class="btn" type="submit" name="confirm" value="Make a choice!">
 		</form>
-		<div id="watch-statistics"><a href="voting_result.php">Statistics</a></div>
+		<div id="watch-statistics" class="btn"><a href="voting_result.php">Statistics</a></div>
 	</div>
 	<?php
 		session_start();

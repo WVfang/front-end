@@ -34,7 +34,7 @@
       }
     </script> 
 </head>
-<body style="background: rgb(240, 230, 140);">
+<body style="background: #fffacd;">
 
 	<?php
 
@@ -78,7 +78,7 @@
 			$totalVotes = getJSONData($votes);
 			voiceAdding($totalVotes, $_POST["thief"], $votes);
 
-		} else if(!empty($_POST["thief"])){
+		} else if(@($_POST["thief"])){
 			$_SESSION["visits"] = 0;
      		header("Location: index.php");
 		}
