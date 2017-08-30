@@ -51,9 +51,8 @@
 
 				if(userName == "This nickname already exists")
 					$("#error-message").show();
-				else if(userName != "") {
+				else if(userName != "") 
 					window.location.replace("chat.php");		
-				}
 				else
 					alert("Enter name and pass");
 		

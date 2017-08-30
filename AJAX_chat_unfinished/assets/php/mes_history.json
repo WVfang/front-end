@@ -1,0 +1,28 @@
+{
+    "counter": 5,
+    "message1": {
+        "time": "15:34:35",
+        "user": "time",
+        "message": "Hello"
+    },
+    "message2": {
+        "time": "15:35:12",
+        "user": "time",
+        "message": "Hello"
+    },
+    "message3": {
+        "time": "15:35:26",
+        "user": "time",
+        "message": "Hi"
+    },
+    "message4": {
+        "time": "15:36:04",
+        "user": "time",
+        "message": "hi"
+    },
+    "message5": {
+        "time": "15:36:54",
+        "user": "Robin",
+        "message": "hi"
+    }
+}

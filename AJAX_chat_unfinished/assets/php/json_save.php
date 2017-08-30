@@ -12,14 +12,19 @@
 	}
 
 	
-	$dataStore = "json.json";
+	$dataStore = "mes_history.json";
 
 	$data = getData($dataStore);
 	$data["counter"]++;
 	$messageKey = "message" . $data["counter"];
 
+	
+	session_start();
+	$userName = $_SESSION["userName"];
 
-	$data[$messageKey] = $_POST["chat-message"];
+	$dataTime = strftime(date("H:i:s"));
+
+	$data[$messageKey] = ["time" => $dataTime, "user" => $userName, "message" => $_POST["chat-message"]];
 
 	$data = json_encode($data, JSON_PRETTY_PRINT);
 
