@@ -24,23 +24,38 @@
 	</div>
 	<section id="chat-wrapper">
 		<div id="chat-history">
+			<!-- Возможно лучше сделать вывод данных с $.getJSON -->
 			<script type="text/javascript">
 				$(document).ready(function() {
-					<?php
-						$dataStore = "assets/php/mes_history.json";
-						if(@file_get_contents($dataStore)) {
-							$data = file_get_contents($dataStore);
-							$data = json_decode($data, true);
-							
+				$.ajax({
+					dataType: "json",
+					url: "assets/php/mes_history.json",
+					success: function(json) {
+						console.log(json);
+					for(var i = 0; i < json["counter"]; i++) {
+						var messageKey = "message" + (i+1);
+						if(true/*$.now()/1000 - json[messageKey]["date"] < 3600*/) {
+							$("#chat-history").append("<div><span class=\"userName\">[" + json[messageKey]["time"] + "] " + json[messageKey]["user"] + ":</span> " + json[messageKey]["message"] + "</div>");
 						}
-						else {
-							$data = [];
-						}
-
-						print_r($data);
-					?>
+						//console.log($.now()/1000 - json[messageKey]["date"]);
+						
+					}
+					}
 				});
-			</script>
+				/*
+				$.getJSON("assets/php/mes_history.json", function(json) {
+					console.log(json);
+					for(var i = 0; i < json["counter"]; i++) {
+						var messageKey = "message" + (i+1);
+						if(true$.now()/1000 - json[messageKey]["date"] < 3600) {
+							$("#chat-history").append("<div><span class=\"userName\">[" + json[messageKey]["time"] + "] " + json[messageKey]["user"] + ":</span> " + json[messageKey]["message"] + "</div>");
+						}
+						//console.log($.now()/1000 - json[messageKey]["date"]);
+						
+					}
+				})*/
+				});
+			</script>	
 		</div>
 		<div id="chat-send-form">
 			<input id="chat-message" type="text" name="chat-message">
@@ -61,7 +76,7 @@
 				complete: function() {
 					$.getJSON("assets/php/mes_history.json", {}, function(json) {
 							var messageKey = "message" + json["counter"];
-							$("#chat-history").append("<div><span id=\"userName\">[" + json[messageKey]["time"] + "] " + json[messageKey]["user"] + ":</span> " + json[messageKey]["message"] + "</div>");
+							$("#chat-history").append("<div><span class=\"userName\">[" + json[messageKey]["time"] + "] " + json[messageKey]["user"] + ":</span> " + json[messageKey]["message"] + "</div>");
 					})
 				}
 			});

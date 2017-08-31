@@ -180,7 +180,6 @@ input {
 
 #chat-history div {
 	
-	margin-top: 100%;
 }
 
 #chat-message {
@@ -189,11 +188,9 @@ input {
 	color: #635960;
 }
 
-#userName {
+.userName {
 	font-weight: 700;
 }
-
-
 
 /*
 	========================================

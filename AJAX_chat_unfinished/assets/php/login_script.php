@@ -12,6 +12,7 @@
 	}
 
 	function addNewUser(&$usersData, $usersDataStore) {
+		
 		$userName = $_POST["name"];
 		$usersData[$userName] = $_POST["password"];
 
@@ -25,6 +26,10 @@
 	}
 
 	function personVerification(&$usersData, $usersDataStore) {
+
+		if($_POST["name"] == "") 
+			return "";
+		
 		foreach ($usersData as $name => $pass) { 
 			if($_POST["name"] == $name) {
 			    if($_POST["password"] == $pass) 
@@ -35,6 +40,7 @@
 					return "";
 			}
 		}
+
 		return addNewUser($usersData, $usersDataStore);
 	}
 	//print_r($_POST);
@@ -43,10 +49,10 @@
 		$usersDataStore = "users.json";
 		$usersData = getJSONData($usersDataStore);
 		$userName = personVerification($usersData, $usersDataStore);
-
+		// Создание сессионной перенной для ее использование при создании json-элементов-сообщений
 		session_start();
 		$_SESSION["userName"] = $userName;
-
+		// Возвращение json строки, которая используется в функции запроса post в index.php
 		$arr = ["userName" => $userName];
 		echo json_encode($arr);
 	}

@@ -26,12 +26,12 @@
 		<div class="login-form">
 			<label>
 				Enter your name
-				<input id="name" type="text" name="name" value="Robin">
+				<input id="name" type="text" name="name" value="">
 			</label>
 			<div id="error-message">This nickname already exists</div>
 			<label>
 				Enter your password
-				<input id="password" type="password" name="password" value="robin1997">
+				<input id="password" type="password" name="password" value="">
 			</label>
 			<input  id="btn-login" type="submit" name="submit" value="Submit">
 			<div id="btn-shadow">
@@ -55,7 +55,6 @@
 					window.location.replace("chat.php");		
 				else
 					alert("Enter name and pass");
-		
 			});
 						
 		});
