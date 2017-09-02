@@ -50,23 +50,36 @@
 				var arr = JSON.parse(json);
 				var userName = arr.userName;
 
-				if(userName == "This nickname already exists")
+				if(userName == "This nickname already exists") {
 					$("#error-message").show();
-				else if(userName != "") 
+				} else if(userName != "") {
 					window.location.replace("chat.php");		
-				else
+				} else {
 					alert("Enter name and pass");
+				}
 			});		
 		});
 		*/
 
 		$("#btn-login").click(function() {
 
-			var name = $("#name").val();
-			var pass = $("#password").val();
+			if($("#name").val() == "" || $("#password").val() == "") {
+				alert("Enter name and password!");
+				return;
+			}
 
-			$.post("assets/php/users_data_save.php", {"name": name, "password": pass}, function() {
+			$.post("assets/php/users_data_save.php", {"name": $("#name").val(), "password": $("#password").val()}, function(userName) {
+				console.log(userName);
 
+				if(userName == "This nickname already exists") {
+					$("#error-message").show();
+					setTimeout(function() {
+						$("#error-message").fadeOut();
+					}, 1000);
+				} else {
+					window.location.replace("chat.php");		
+				}
+			
 			});
 
 			$("#name").val("");
@@ -74,8 +87,9 @@
 			
 		})
 	</script>
-	<?php
-		$mysqli = new mysqli("localhost", "root", "sql1648", "ajax_chat");
+
+	<!--<?php/*
+		$mysqli = new mysqli("localhost", "root", "", "ajax_chat");
 
 		if(mysqli_connect_errno()) {
 			printf("Connect failed: %s\n", mysqli_connect_error());
@@ -85,6 +99,6 @@
 		printf("Host info: %s\n", $mysqli->host_info);
 
 		$mysqli->close();
-	?>
+	*/?>-->
 </body>
 </html>

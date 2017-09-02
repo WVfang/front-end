@@ -8,6 +8,7 @@
 	<script type="text/javascript">
 		function getJSONajax(url, amount) {
 			$.getJSON(url, {}, function(json) {
+				console.log(json);
 
 				if(amount == "last")
 					mesInd = json["counter"] - 1;
@@ -25,12 +26,11 @@
 					$("#message-block").css({"height": newHeight});
 				}
 
-				$("#chat-history").scrollTop($("#chat-history")[0].scrollHeight);
-				console.log("during " + $('#chat-history')[0].scrollHeight);
+				//$("#chat-history").scrollTop($("#chat-history")[0].scrollHeight);
 				
-				/*$("#chat-history").animate({
+				$("#chat-history").animate({
 			 		scrollTop: $('#chat-history')[0].scrollHeight
-				}, 800);*/
+				}, 800);
 			})
 		}
 	</script>
@@ -72,7 +72,6 @@
 				url: "assets/php/json_save.php",
 				data: $("#chat-message").serialize(),
 				complete: function() {
-					console.log("before post " + $('#chat-history')[0].scrollHeight);
 					getJSONajax("assets/php/jsons/mes_history.json", "last");
 				}
 			});
@@ -82,9 +81,7 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			console.log("before start " + $('#chat-history')[0].scrollHeight);
 			getJSONajax("assets/php/jsons/mes_history.json", "all");
-			console.log("after start " + $('#chat-history')[0].scrollHeight);
 		});
 	</script>
 </body>
