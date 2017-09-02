@@ -40,6 +40,7 @@
 		</div>
 	</section>
 	<script type="text/javascript">
+		/*
 		$("#btn-login").click(function() {
 
 			var name = $("#name").val();
@@ -55,9 +56,35 @@
 					window.location.replace("chat.php");		
 				else
 					alert("Enter name and pass");
-			});
-						
+			});		
 		});
+		*/
+
+		$("#btn-login").click(function() {
+
+			var name = $("#name").val();
+			var pass = $("#password").val();
+
+			$.post("assets/php/users_data_save.php", {"name": name, "password": pass}, function() {
+
+			});
+
+			$("#name").val("");
+			$("#password").val("");
+			
+		})
 	</script>
+	<?php
+		$mysqli = new mysqli("localhost", "root", "sql1648", "ajax_chat");
+
+		if(mysqli_connect_errno()) {
+			printf("Connect failed: %s\n", mysqli_connect_error());
+			exit();
+		}
+
+		printf("Host info: %s\n", $mysqli->host_info);
+
+		$mysqli->close();
+	?>
 </body>
 </html>

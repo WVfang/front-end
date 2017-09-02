@@ -16,6 +16,7 @@
 
 				for(; mesInd < json["counter"]; mesInd++) {
 					var messageKey = "message" + (mesInd+1);
+					//console.log(messageKey);
 					if($.now()/1000 - json[messageKey]["date"] < 3600) {
 						$("#chat-history").append("<div class=\"history-message\"><span class=\"userName\">[" + json[messageKey]["time"] + "] " + json[messageKey]["user"] + ":</span> " + json[messageKey]["message"] + "</div>");
 					}
@@ -24,9 +25,12 @@
 					$("#message-block").css({"height": newHeight});
 				}
 
-				$("#chat-history").animate({
+				$("#chat-history").scrollTop($("#chat-history")[0].scrollHeight);
+				console.log("during " + $('#chat-history')[0].scrollHeight);
+				
+				/*$("#chat-history").animate({
 			 		scrollTop: $('#chat-history')[0].scrollHeight
-				}, 800);
+				}, 800);*/
 			})
 		}
 	</script>
@@ -68,6 +72,7 @@
 				url: "assets/php/json_save.php",
 				data: $("#chat-message").serialize(),
 				complete: function() {
+					console.log("before post " + $('#chat-history')[0].scrollHeight);
 					getJSONajax("assets/php/jsons/mes_history.json", "last");
 				}
 			});
@@ -77,7 +82,9 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			console.log("before start " + $('#chat-history')[0].scrollHeight);
 			getJSONajax("assets/php/jsons/mes_history.json", "all");
+			console.log("after start " + $('#chat-history')[0].scrollHeight);
 		});
 	</script>
 </body>
