@@ -70,7 +70,7 @@
 
 			$.post("assets/php/users_data_save.php", {"name": $("#name").val(), "password": $("#password").val()}, function(userName) {
 				console.log(userName);
-
+				
 				if(userName == "This nickname already exists") {
 					$("#error-message").show();
 					setTimeout(function() {
@@ -79,7 +79,7 @@
 				} else {
 					window.location.replace("chat.php");		
 				}
-			
+				
 			});
 
 			$("#name").val("");

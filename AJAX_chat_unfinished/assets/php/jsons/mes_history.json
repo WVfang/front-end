@@ -1,3 +1,9 @@
 {
-    "counter": 0
+    "counter": 1,
+    "message1": {
+        "date": 1504533762,
+        "time": "16:02:42",
+        "user": "Harvey",
+        "message": "Hello world"
+    }
 }

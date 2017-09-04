@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css?ver=1">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico" rel="stylesheet">
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<!--
 	<script type="text/javascript">
 		function getJSONajax(url, amount) {
 			$.getJSON(url, {}, function(json) {
@@ -34,6 +35,7 @@
 			})
 		}
 	</script>
+	-->
 </head>
 <body>
 	<header>
@@ -66,7 +68,12 @@
 			if((event.type == "keypress" && event.keyCode != 13) || 
 			   (event.type == "click" && event.currentTarget.id == "chat-message"))
 				return;
-			
+
+			$.post("assets/php/users_messages_save.php", {"message":$("#chat-message").val()}, function(data) {
+				console.log(data);
+			})
+
+			/*
 			$.ajax({
 				type: "POST",
 				url: "assets/php/json_save.php",
@@ -74,15 +81,40 @@
 				complete: function() {
 					getJSONajax("assets/php/jsons/mes_history.json", "last");
 				}
-			});
+			});*/
 
 			$("#chat-message").val("");
 		});
 	</script>
-	<script type="text/javascript">
+	<!--<script type="text/javascript">
 		$(document).ready(function() {
 			getJSONajax("assets/php/jsons/mes_history.json", "all");
 		});
+	</script>-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$.post("assets/php/users_get_mes_history.php", {"dataAmount": "last"}, function(json) {
+				
+				var data = JSON.parse(json);
+				console.log(data);
+
+				for(var i = 0; i < data.length; i++) {
+					$("#chat-history").append("<div class=\"history-message\"><span class=\"userName\">[" + data[i]["time"] + "] " + data[i]["user"] + ":</span> " + data[i]["message"] + "</div>");
+				}
+
+				//$("#chat-history").append(json);
+
+				//var newHeight = $("#message-block").height() - $(".history-message:last").height();
+				//var height = 0;
+				//for(var i = 0; i < $(".history-message").length; i++) {
+				//	height += $(".history-message:nth-child(0)").height();
+				//}
+				//console.log($("#chat-history:nth-child(2)").height());
+				//$("#message-block").css({"height": newHeight});
+
+			});
+		})	
 	</script>
 </body>
 </html>

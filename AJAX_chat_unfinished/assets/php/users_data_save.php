@@ -29,13 +29,20 @@
 		$userName = $_POST["name"];
 	}
 
+	// Передача имени обратно на сраницу входа
+	echo $userName;
+
 	// Создание сессионной перенной для ее использование при создании сообщений
 	session_start();
 	$_SESSION["userName"] = $userName;
 
 //  ===========================================================
 
-	//echo $userName;
+	#$res = $mysqli->query("SELECT Login, Password FROM people");
+	#while($row = $res->fetch_assoc()) {
+	#	print_r($row);
+	#}
+
 	//print_r($_POST["name"] . " " . $_POST["password"] . " ");
 	//echo $mysqli->host_info . "\n";
 
