@@ -46,7 +46,7 @@
 	//print_r($_POST);
 	if(isset($_POST["name"]) and isset($_POST["password"])) {
 
-		$usersDataStore = "jsons/users.json";
+		$usersDataStore = "jsons/users_personal_data.json";
 		$usersData = getJSONData($usersDataStore);
 		$userName = personVerification($usersData, $usersDataStore);
 		// Создание сессионной перенной для ее использование при создании json-элементов-сообщений

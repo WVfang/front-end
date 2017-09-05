@@ -186,8 +186,12 @@ input {
 	color: #635960;
 }
 
-.userName {
+.mes-time-and-name {
 	font-weight: 700;
+}
+
+#message-block {
+	height: 340px;
 }
 
 /*

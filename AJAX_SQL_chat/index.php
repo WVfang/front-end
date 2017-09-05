@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>AJAX</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="assets/styles.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico" rel="stylesheet">
 	<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 </head>
@@ -26,7 +26,7 @@
 		<div class="login-form">
 			<label>
 				Enter your name
-				<input id="name" type="text" name="name" value="">
+				<input id="login" type="text" name="name" value="">
 			</label>
 			<div id="error-message">This nickname already exists</div>
 			<label>
@@ -40,36 +40,12 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-		/*
-		$("#btn-login").click(function() {
-
-			var name = $("#name").val();
-			var pass = $("#password").val();
 		
-			$.post("assets/php/login_script.php", {"name": name, "password": pass}, function(json) {
-				var arr = JSON.parse(json);
-				var userName = arr.userName;
-
-				if(userName == "This nickname already exists") {
-					$("#error-message").show();
-				} else if(userName != "") {
-					window.location.replace("chat.php");		
-				} else {
-					alert("Enter name and pass");
-				}
-			});		
-		});
-		*/
-
 		$("#btn-login").click(function() {
 
-			if($("#name").val() == "" || $("#password").val() == "") {
-				alert("Enter name and password!");
-				return;
-			}
-
-			$.post("assets/php/users_data_save.php", {"name": $("#name").val(), "password": $("#password").val()}, function(userName) {
-				console.log(userName);
+			// Запрос на подтверждение имени/пароля или на создание нового пользователя
+			$.post("assets/php/sql_login_script.php", {"login": $("#login").val(), "password": $("#password").val()}, function(userName) {
+				//console.log(userName);
 				
 				if(userName == "This nickname already exists") {
 					$("#error-message").show();
@@ -82,23 +58,31 @@
 				
 			});
 
-			$("#name").val("");
+			// Альтернатива с json
+			/*
+			$.post("assets/php/json_login_script.php", {"login": $("#login").val(), "password": $("#password").val()}, function(json) {
+				var arr = JSON.parse(json);
+				var userName = arr.userName;
+
+				if(userName == "This nickname already exists") {
+					$("#error-message").show();
+				} else if(userName != "") {
+					window.location.replace("chat.php");		
+				} else {
+					alert("Enter name and pass");
+				}
+			});
+			*/
+
+			if($("#login").val() == "" || $("#password").val() == "") {
+				alert("Enter name and password!");
+				return;
+			}
+
+			$("#login").val("");
 			$("#password").val("");
-			
-		})
+
+		});
 	</script>
-
-	<!--<?php/*
-		$mysqli = new mysqli("localhost", "root", "", "ajax_chat");
-
-		if(mysqli_connect_errno()) {
-			printf("Connect failed: %s\n", mysqli_connect_error());
-			exit();
-		}
-
-		printf("Host info: %s\n", $mysqli->host_info);
-
-		$mysqli->close();
-	*/?>-->
 </body>
 </html>

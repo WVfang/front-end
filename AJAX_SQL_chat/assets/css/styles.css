@@ -1,0 +1,201 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: #b9c783;
+}
+
+/*
+	========================================
+	Rows and Title
+	========================================
+*/
+
+header {
+	font-size: 0;
+}
+
+.row-top {
+	display: inline-block;
+	width: 10%;
+	height: 10px;
+}
+
+.row-top:nth-child(5n) {
+	background: #7bc3ab;
+}
+
+.row-top:nth-child(5n+1) {
+	background: #635960;
+}
+
+.row-top:nth-child(5n+2) {
+	background: #8b8e59;
+}
+
+.row-top:nth-child(5n+3) {
+	background: #eada7d;
+}
+
+.row-top:nth-child(5n+4) {
+	background: #fffecd;
+}
+
+#main-title {
+	font: 400 88px/21px "Pacifico", cursive;
+	color: #fffecd;
+	text-align: center;
+	margin: 150px 0;
+}
+
+/*
+	========================================
+	Buttons and Input
+	========================================
+*/
+
+input, button {
+	height: 45px;
+	outline: none;
+	border: none;
+	padding: 5px 15px;
+}
+
+input {
+	font-size: 24px;
+}
+
+#btn-login,
+#btn-send {
+	background: #635960;
+	font-size: 20px;
+}
+
+#btn-login {
+	height: 50px;
+	z-index: 2;
+	position: relative;
+	margin-top: 20px;
+	color: #fffecd;
+}
+
+#btn-send {
+	width: 17.5%;
+	float: right;
+	color: #fff;
+}
+
+#btn-shadow {
+	position: relative;
+	width: 450px;
+	height: 400px;
+	margin-top: -50px;
+	overflow: hidden;
+}
+
+#btn-shadow div {
+	content: "";
+	width: 370px;
+	height: 300px;
+	margin-top: 50px;
+	background: linear-gradient(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
+	transform-origin: left 0;
+	transform: rotate(-20deg);
+}
+
+/*
+	========================================
+	Login menu
+	========================================
+*/
+
+#chat-wrapper,
+#login-wrapper {
+	margin: 0 auto;
+	font-family: "Montserrat", sans-serif;
+}
+
+#login-wrapper {
+	width: 375px;
+}
+
+.login-form {
+	position: relative;
+}
+
+.login-form label {
+	display: block;
+	margin-bottom: 20px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #635960;
+}
+
+.login-form input {
+	width: 100%;
+	margin-top: 10px;
+	background: #fffecd;
+	color: #635960;
+}
+
+#error-message {
+	display: none;
+	position: absolute;
+	width: 150px;
+	height: 45px;
+	right: -170px;
+	top: 32px;
+	text-align: center;
+	color: rgba(255, 0, 0, 0.5);
+	font-weight: 400;
+}
+
+
+/*
+	========================================
+	Chat window
+	========================================
+*/
+
+#chat-wrapper {
+	width: 800px;
+	margin-bottom: 50px;
+}
+
+#chat-history {
+	position: relative;
+	height: 400px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	font-size: 24px;
+	padding: 30px;
+	width: 100%;
+	margin-bottom: 30px;
+	background: #fffecd;
+}
+
+#chat-message {
+	width: 77.5%;
+	background: #fffecd;
+	color: #635960;
+}
+
+.mes-time-and-name {
+	font-weight: 700;
+}
+
+#message-block {
+	height: 340px;
+}
+
+/*
+	========================================
+	
+	========================================
+*/
