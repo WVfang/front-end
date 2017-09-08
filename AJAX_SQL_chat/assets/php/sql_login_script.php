@@ -1,13 +1,20 @@
 <?php
-	
+	include "log_functions.php";
+
 	// Подключение
 	$mysqli = new mysqli("localhost", "root", "", "ajax_chat");
 	if($mysqli->connect_errno) {
-		echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+		connectError($mysqli, "logs/sql_mess_save.log");
 	}
 
-	$res = $mysqli->query("SELECT Login, Password FROM people");
+	$res = $mysqli->query("SELECT Login, Password FROM people WHERE Login = Harvey");
+	$res2 = $mysqli->query("SELECT Login, Password FROM people");
 
+	if(!$row = $res->fetch_assoc()) {
+		echo "Не удалось создать строку: (" . $mysqli->errno . ") " . $mysqli->error;
+	}
+
+	/*
 	// Проверка на совпадения и совместимость имени с паролем
 	$userName = "";
 	while($row = $res->fetch_assoc()) {
@@ -37,6 +44,6 @@
 
 	// Создание сессионной перенной для ее использование при создании сообщений
 	session_start();
-	$_SESSION["userName"] = $userName;
+	$_SESSION["userName"] = $userName;*/
 
 ?>

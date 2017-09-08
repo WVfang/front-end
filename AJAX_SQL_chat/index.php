@@ -45,8 +45,8 @@
 
 			// Запрос на подтверждение имени/пароля или на создание нового пользователя
 			$.post("assets/php/sql_login_script.php", {"login": $("#login").val(), "password": $("#password").val()}, function(userName) {
-				//console.log(userName);
-				
+				alert(userName);
+				/*
 				if(userName == "This nickname already exists") {
 					$("#error-message").show();
 					setTimeout(function() {
@@ -54,7 +54,7 @@
 					}, 1000);
 				} else {
 					window.location.replace("chat.php");		
-				}
+				}*/
 				
 			});
 

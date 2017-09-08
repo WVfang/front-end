@@ -1,13 +1,14 @@
 <?php
-	
+	include "log_functions.php";
+
 	// Подключение
 	$mysqli = new mysqli("localhost", "root", "", "ajax_chat");
 	if($mysqli->connect_errno) {
-		echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+		connectError($mysqli, "logs/sql_mess_save.log");
 	}
 
 	// Замена смайлов картинками и экранирование специальных символов
-	$message = str_replace([":)", ":("], ["<img src=\"assets/php/img/smile_happy.png\">", "<img src=\"assets/php/img/smile_sad.png\">"], $_POST["message"]);
+	$message = $_POST["message"];
 	$message = $mysqli->real_escape_string($message);
 
 	// Начало сессии для получения доступа к переменной userName
@@ -29,7 +30,7 @@
 		'" . $_SESSION["userName"] . "',
 		'" . $message . "')")) {
 
-		echo "Не удалось создать строку: (" . $mysqli->errno . ") " . $mysqli->error;
+		addSQLRowError($mysqli, "logs/sql_mess_save.log");
 	}
 	
 ?>

@@ -15,6 +15,8 @@
 			for(var i = 0; i < data.length; i++) {
 				//console.log($.now()/1000 - data[i]["date"]);
 				if($.now()/1000 - data[i]["date"] < 3600) {
+					data[i]["message"] = data[i]["message"].replace(/:\)/, "<img src=\"assets/php/img/smile_happy.png\">");
+					data[i]["message"] = data[i]["message"].replace(/:\(/, "<img src=\"assets/php/img/smile_sad.png\">");
 					$("#chat-history").append("<div class=\"history-message\"><span class=\"mes-time-and-name\">[" + data[i]["time"] + "] " + data[i]["user"] + ":</span> " + data[i]["message"] + "</div>");
 
 					var marginTop = $("#message-block").height() - $(".history-message:last").height();
@@ -97,6 +99,7 @@
 
 			// Запрос на сохранение последнего сообщения в json файл с его последующим появлением в чате
 			$.post("assets/php/sql_messages_save.php", {"message":$("#chat-message").val()}, function(data) {
+				console.log(data);
 				$.post("assets/php/sql_get_messages_history.php", {"dataAmount": "last"}, function(json) {
 					messageVisualisation(json);
 				})

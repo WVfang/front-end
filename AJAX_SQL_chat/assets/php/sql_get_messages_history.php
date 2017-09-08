@@ -1,8 +1,10 @@
 <?php
+	include "log_functions.php";
+
 	$mysqli = new mysqli("localhost", "root", "", "ajax_chat");
 
 	if($mysqli->connect_errno) {
-		echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+		connectError($mysqli, "logs/sql_mess_save.log");
 	}
 
 	if($_POST["dataAmount"] == "last") {
