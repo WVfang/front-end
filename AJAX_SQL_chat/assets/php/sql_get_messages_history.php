@@ -4,7 +4,7 @@
 	$mysqli = new mysqli("localhost", "root", "", "ajax_chat");
 
 	if($mysqli->connect_errno) {
-		connectError($mysqli, "logs/sql_mess_save.log");
+		connectError($mysqli);
 	}
 
 	if($_POST["dataAmount"] == "last") {

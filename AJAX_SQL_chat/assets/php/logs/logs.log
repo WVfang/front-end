@@ -1,0 +1,14 @@
+[11/09/17 15:26:28] Не удалось подключиться к MySQL: (1044) Access denied for user ''@'localhost' to database 'ajax_chat'
+[11/09/17 15:26:28] Не удалось создать строку: () 
+[11/09/17 15:40:24] Не удалось создать строку: (1064) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INT messages(
+
+		DateSeconds,
+		SendTime,
+		User,
+		Message)
+
+		VALUES(
+' at line 1
+[11/09/17 15:45:56] Не удалось принять данные: (1064) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'e'' at line 1
+[11/09/17 15:52:09] Не удалось создать строку: (1064) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ike',
+		'H\'ello')' at line 12
