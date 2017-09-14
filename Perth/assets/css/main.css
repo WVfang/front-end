@@ -1,0 +1,189 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body, h1, h2, p {
+	margin: 0;
+	padding: 0;
+}
+
+#content-1, #subscription {
+	background: #e5e5e5;
+}
+
+#donations {
+	background: #ccc url(../img/green-pattern.jpg) repeat;
+}
+
+.container {
+	padding: 5px 60px;
+}
+
+/*
+	==================================================
+	Buttons
+	==================================================
+*/
+
+.btn {
+	position: relative;
+	padding: 10px 20px;
+	font-variant: small-caps;
+	font-size: 20px;
+	background: none;
+	border: 2px solid #fff;	
+	border-radius: 2px;
+}
+
+.btn i {
+	 font-size: 14px;
+}
+
+.btn-header,.btn-donations {
+	color: #fff;
+	border-color: #fff;
+}
+
+.btn-content-1 {
+	color: #2ead89;
+	border-color: #2ead89;
+}
+
+.btn-content-2 {
+	color: #bc2e8f;
+	border-color: #bc2e8f;
+}
+
+/*
+	==================================================
+	Typography
+	==================================================
+*/
+
+@font-face {
+    font-family: BlackJack; /* Гарнитура шрифта */
+    src: url(../fonts/BLACKJAR.ttf); /* Путь к файлу со шрифтом */
+   }
+
+h1, h2, p {
+	margin-bottom: 20px;
+}
+
+h1 {
+	font: 400 60px 'BlackJack', cursive;
+}
+
+h2 {
+	font: 200 40px 'Montserrat', sans-serif;
+}
+
+p {
+	font: 100 14px/1.5 'Montserrat', sans-serif;
+}
+
+/*
+	==================================================
+	Header
+	font-family: 'Montserrat', sans-serif;
+	font-family: 'Kaushan Script', cursive;
+	font-family: 'BlackJack', cursive;
+	==================================================
+*/
+
+header {
+	background: #ccc url(../img/blue-pattern.jpg) repeat;
+	color: #fff;
+}
+
+#logo {
+	width: 50px;
+	padding: 20px 0 0 0;
+	text-align: center;
+	font: 40px 'Kaushan Script', cursive;
+	color: blue;
+	background: #fff;
+}
+
+#menu-icon {
+	margin-top: 20px;
+	font-size: 24px;
+	text-align: right;
+}
+
+#header-wrapper {
+	position: relative;
+}
+
+#header-content {
+	text-align: right;
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+
+#header-content p {
+	font-size: 28px;
+	margin-bottom: 40px;
+}
+
+/*
+	==================================================
+	Content-1
+	==================================================
+*/
+
+#content-1 {
+	padding-top: 60px;
+	padding-bottom: 100px;
+}
+
+#content-1 div {
+	width: 40%;
+}
+
+/*
+	==================================================
+	Content-2
+	==================================================
+*/
+
+#content-2 {
+	padding-top: 60px;
+	padding-bottom: 100px;
+}
+
+#content-2 div {
+	width: 40%;
+}
+
+/*
+	==================================================
+	Donations
+	==================================================
+*/
+
+#donations {
+	padding-top: 60px;
+	padding-bottom: 100px;
+}
+
+
+/*
+	==================================================
+	Subcription
+	==================================================
+*/
+
+#subscription {
+	padding-top: 60px;
+	padding-bottom: 100px;
+}
+
+/*
+	==================================================
+	Footer
+	==================================================
+*/
