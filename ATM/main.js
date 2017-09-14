@@ -1,23 +1,29 @@
+
 function authCheck(auth) {
-	if(auth) {
+
+	if(!auth) {
+		console.log("You must login to run this operation");
 		return true;
 	} else {
-		console.log("Error");
 		return false;
 	}
 }
 
-function userIndex(ATM) {
-	for(var i = 0; i < ATM.users.length; i++) {
-		if(ATM.users[i].number == ATM.current_user) {
-			return i;
-		}
-	}
+function adminCheck(auth, user) {
 
-	return 0;
+	if(authCheck(auth)) {
+		return true;
+	} else if(user != "admin") {
+		console.log("This operation can be used only by admin");
+		return true;
+	} else {
+		return false;
+	}
 }
 
 var logs = {};
+var reports = [];
+
 var ATM = {
 	is_auth: false,
 	current_user: false,
@@ -33,19 +39,24 @@ var ATM = {
 	// authoriazation ATM.auth("0025", "123");
 	auth: function(number, pin) {
 
-		if(authCheck(this.is_auth)) return;
+		if(this.is_auth) {
+			console.log("You must log out to run this operation");
+			return;
+		}
 
 		for(var i = 0; i < this.users.length; i++) {
 			if(this.users[i].number == number && this.users[i].pin == pin) {
 
 				this.is_auth = true;
-				this.current_user = number;
+				this.current_user = i;
 				this.current_type = this.users[i].type;
 
 				console.log("Loged in " + number);
 
 				// ==================================================
 				logs.is_auth = ATM.is_auth;
+				logs.current_user = ATM.current_user;
+				logs.current_type = ATM.current_type;
 				console.log(logs);
 				// ==================================================
 
@@ -53,42 +64,37 @@ var ATM = {
 			}
 		}
 
+		console.log("Loge in failed");
+
 	},
 	// check current debet
 	check: function() {
 
-		if(!authCheck(this.is_auth)) return;
+		if(authCheck(this.is_auth)) return;
 
-		for(var i = 0; i < this.users.length; i++) {
-			if(this.users[i].number == this.current_user) {
-				console.log("Current debet: " + this.users[i].debet);
-				break;
-			}
-		}
+		console.log("Current debet: " + this.users[this.current_user].debet);
+		
 	},
 	// get cash - available for user only ATM.getCash(300);
 	getCash: function(amount) {
 
-		if(!authCheck(this.is_auth)) return;
+		if(authCheck(this.is_auth)) return;
 
-		
-		var index;
-		if(index = userIndex(ATM)) {
-			
-
-			if(this.users[index].debet < amount) {
-				amount = this.users[index].debet;
-				console.log("No more money in cash");
-			} else if(this.cash < amount) {
-				amount = this.cash;
-				console.log("No more money in ATM");
-			} 
-
-			this.users[index].debet -= amount;
-			this.cash -= amount;
-			break;
+		if(this.users[this.current_user].debet < amount) {
+			amount = this.users[this.current_user].debet;
+			console.log("No more money in cash");
 		}
 
+		if(this.cash < amount) {
+			amount = this.cash;
+			console.log("No more money in ATM");
+		} 
+	
+		this.users[this.current_user].debet -= amount;
+		this.cash -= amount;
+		reports.push("Cashed " + amount + "$ by " + this.users[this.current_user].number 
+			+ " (user). Cash left: " + this.cash);
+	
 		console.log("Cashed " + amount + "$");
 
 		// ==================================================
@@ -101,16 +107,12 @@ var ATM = {
 	// load cash - available for user only
 	loadCash: function(amount) {	
 
-		if(!authCheck(this.is_auth)) return;
+		if(authCheck(this.is_auth)) return;
 
-		for(var i = 0; i < this.users.length; i++) {
-			if(this.users[i].number == this.current_user) {
-				this.users[i].debet += amount;
-				break;
-			}
-		}
-
+		this.users[this.current_user].debet += amount;
 		this.cash += amount;
+		reports.push("Loaded " + amount + "$ by " + this.users[this.current_user].number 
+			+ " (user). Cash left: " + this.cash);
 
 		console.log("Loaded " + amount + "$");
 
@@ -124,9 +126,12 @@ var ATM = {
 	// load cash to ATM - available for admin only - EXTENDED
 	load_cash: function(addition) {
 
-		if(!authCheck(this.is_auth) || this.current_type != "admin") return;
+		if(adminCheck(this.is_auth, this.current_type)) return;
 
 		this.cash += addition;
+		reports.push("Added " + addition + "$ to ATM cash by " + this.users[this.current_user].number 
+			+ " (admin). Cash left: " + this.cash);
+
 		console.log("Added " + addition + "$ to ATM cash");
 
 		// ==================================================
@@ -138,11 +143,14 @@ var ATM = {
 	// get report about cash action for admin only
 	getReport: function() {
 
+		if(adminCheck(this.is_auth, this.current_type)) return;
+
+		console.log(reports);
 	},
 	// log out
 	logout: function() {
 
-		if(!authCheck(this.is_auth)) return;
+		if(authCheck(this.is_auth)) return;
 
 		this.is_auth = false;
 		this.current_user = false;
@@ -152,6 +160,8 @@ var ATM = {
 
 		// ==================================================
 		logs.is_auth = ATM.is_auth;
+		logs.current_user = ATM.current_user;
+		logs.current_type = ATM.current_type;
 		console.log(logs);
 		// ==================================================
 
