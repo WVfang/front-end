@@ -83,7 +83,7 @@ header, #content-1, #content-2 {
 }
 
 .footer-container {
-	height: 43px;
+	height: 100px;
 	padding-top: 40px;
 	padding-bottom: 40px; 
 }
@@ -304,27 +304,45 @@ header img {
 	margin-right: 10px;
 }
 
-#subscription-form div {
+#subscription-form > div {
 	display: inline-block;
 	width: 216px;
-	padding: 9.5px 15px;
+	padding: 9.5px 18px;
 	background: #fff;
+	border-radius: 9px;
 	text-align: left;
+}
+
+#subscription-input {
+	display: inline-block;
+	width: 90%;
 }
 
 #subscription-form input {
 	width: 85%;
 	outline: none;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+#subscription-input:after {
+	content: "|";
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.1);
 }
 
 #subscription-form i {
 	float: right;
 	margin-top: 0.25em;
-	font-size: 14px;
+	font-size: 15px;
 	color: #6cc8ff;
 }
 
 /*
+	padding-left: 15px;
+	border-left: 1.5px solid rgba(0, 0, 0, 0.1);
 	==================================================
 	Footer
 	==================================================
