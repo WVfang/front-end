@@ -9,10 +9,9 @@
 body {
 	margin: 0;
 	padding: 0;
-	font-weight: 500;
 }
 
-header, #content-1, #content-2 {
+header, #content-1, #content-2, footer {
 	position: relative;
 }
 
@@ -28,23 +27,31 @@ header, #content-1, #content-2 {
 	font-weight: 700;
 }
 
+.w3-border-light-blue {
+	border-color: #00aee0!important;
+}
+
 /*
 	==================================================
 	Backgrounds
 	==================================================
 */
 
+header {
+	background: url(../img/blue-pattern.jpg) repeat;
+}
+
 #content-1, #subscription {
-	background: #eee;
+	background: rgb(244,244,244);
 }
 
 #donations {
-	background: #ccc url(../img/green-pattern.jpg) repeat;
+	background: url(../img/green-pattern.jpg) repeat;
 }
 
 /*
 	==================================================
-	Containers
+	Containers (width, height, general font color etc.)
 	==================================================
 */
 
@@ -65,13 +72,13 @@ header, #content-1, #content-2 {
 	height: 650px;
 	padding-top: 130px;
 	padding-bottom: 150px;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgba(0, 0, 0, 0.45);
 }
 
 .content-2-container {
 	height: 650px;
 	padding-top: 90px;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgba(0, 0, 0, 0.45);
 }
 
 .donations-container {
@@ -86,9 +93,10 @@ header, #content-1, #content-2 {
 }
 
 .footer-container {
-	height: 100px;
-	padding-top: 40px;
-	padding-bottom: 40px; 
+	height: 101px;
+	padding-top: 45px;
+	padding-bottom: 35px; 
+	color: rgba(0, 0, 0, 0.6);
 }
 
 /*
@@ -98,36 +106,46 @@ header, #content-1, #content-2 {
 */
 
 .btn {
-	position: relative;
-	margin-top: 20px;
-	padding: 10px 29px 15px 29px;
-	font-variant: small-caps;
-	font-size: 20px;
-	font-weight: 100;
+	padding-bottom: 18px;
+	padding-top: 18px;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: 0px;
+	text-transform: uppercase;
 	background: none;
 	border: 1.5px solid #fff;	
 	border-radius: 2px;
 }
 
 .btn i {
-	margin-left: 5px;
+	margin-left: 10px;
 	font-size: 15px;
 }
 
 .btn-header {
+	padding-right: 28px;
+    padding-left: 28px;
 	color: #fff;
 	border-color: #fff;
 }
 
 .btn-content-1 {
-	color: #3ECF93;
-	border-color: #3ECF93;
-	font-weight: 400;
+    padding-right: 32px;
+    padding-left: 32px;
+	color: rgb(1,176,143);
+	border-color: rgb(1,176,143);
 }
 
 .btn-content-2 {
-	color: #DD61B2;
-	border-color: #DD61B2;
+    padding-left: 32px;
+    padding-right: 32px;
+	color: rgb(255,75,140);
+	border-color: rgb(255,75,140);
+    letter-spacing: -0.5px;
+}
+
+.btn-content-2 i {
+	font-weight: 700;
 }
 
 .btn-donations {
@@ -148,33 +166,42 @@ header, #content-1, #content-2 {
     src: url(../fonts/BLACKJAR.ttf); /* Путь к файлу со шрифтом */
 }
 
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
 h1 {
 	font: 400 70px 'BlackJack', cursive;
 }
 
 h2, h3 {
-	font: 300 36px 'Montserrat', sans-serif;
-	letter-spacing: -1px;
+	font-size: 36px;
+	font-weight: 300;
 }
 
 h2 {
+	letter-spacing: -1px;
 	margin-bottom: 30px;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+h3 {
+	letter-spacing: 0.25px;
+    font-size: 37px;
 }
 
 p {
-	font: 500 14px/24.5px 'Montserrat', sans-serif;
-	letter-spacing: 0.5px;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 24.5px;
+	letter-spacing: 0px;
 	margin-bottom: 25px;
 }
 
 button {
-	font: 500 14px 'Montserrat', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
 	letter-spacing: -0.5px;
-}
-
-#content-1 h2, 
-#content-2 h2 {
-	color: rgba(0, 0, 0, 0.7);
 }
 
 /*
@@ -183,25 +210,14 @@ button {
 	==================================================
 */
 
-header {
-	background: #ccc url(../img/blue-pattern.jpg) repeat;
-}
-
-header img {
-	top: 385px;
-	left: 230px;
-}
-
 #logo {
-	display: inline-block;
 	float: left;
 	margin-top: -30px;
 	padding: 1px 37.5px 27px 37.5px;
-	text-align: center;
 	font: 50px 'Kaushan Script', cursive;
-	color: #6cc8ff;
+	color: rgb(1,171,230);
 	background: #fff;
-	box-shadow: 15px 15px 1px rgba(0, 0, 0, 0.1);
+	box-shadow: 15px 15px 1px rgb(1,177,234);
 }
 
 #menu-icon {
@@ -217,13 +233,21 @@ header img {
 }
 
 #header-content p {
-	font-size: 28px;
-	font-weight: 100;
+	margin-top: 30px;
+	font-size: 32px;
+	font-weight: 200;
 	line-height: 17.5px;
+	letter-spacing: 0px;
 }
 
 .btn-header {
+	margin-top: 34px;
 	margin-right: 5px;
+}
+
+header img {
+	top: 385px;
+	left: 230px;
 }
 
 /*
@@ -236,13 +260,13 @@ header img {
 	width: 60%;
 }
 
+.btn-content-1 {
+	margin-top: 43px;
+}
+
 #content-1 img {
 	bottom: -72.5px;
 	right: -70px;
-}
-
-.btn-content-1 {
-	margin-top: 20px;
 }
 
 /*
@@ -252,8 +276,16 @@ header img {
 */
 
 .content-2-content {
-	width: 42.5%;
+	width: 42%;
 	margin-left: auto;
+}
+
+.btn-content-2 {
+	margin-top: 34px;
+}
+
+.accented-text {
+	color: rgba(0, 0, 0, 0.65);
 }
 
 #content-2 img {
@@ -268,19 +300,12 @@ header img {
 */
 
 #donations {
-	color: #fff;
 	text-align: center;
 }
 
 .btn-donations {
-	margin: 26px;
+	margin-top: 26px;
 }
-
-.btn-donations span {
-	font-style: italic;
-	font-weight: 700;
-}
-
 
 /*
 	==================================================
@@ -299,8 +324,8 @@ header img {
 	margin-right: 15px;
 	margin-left: 15px;
 	font-size: 22px;
-	color: rgba(0, 0, 0, 0.5);
-	border: 3px solid rgba(0, 0, 0, 0.5);
+	color: rgb(83,83,83);
+	border: 3px solid rgb(83,83,83);
 	border-radius: 50%;
 }
 
@@ -313,9 +338,9 @@ header img {
 }
 
 #subscription-form label span {
-	font-weight: 700;
-	font-style: italic;
 	margin-right: 10px;
+	letter-spacing: -0.25px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 #subscription-form > div {
@@ -327,7 +352,7 @@ header img {
 	text-align: left;
 }
 
-#subscription-input {
+#subscription-input-wrapper {
 	display: inline-block;
 	width: 90%;
 }
@@ -336,12 +361,10 @@ header img {
 	width: 85%;
 	outline: none;
 	font-size: 12px;
-	font-style: italic;
-	font-weight: 700;
 	color: rgba(0, 0, 0, 0.5);
 }
 
-#subscription-input:after {
+#subscription-input-wrapper:after {
 	content: "|";
 	font-size: 14px;
 	color: rgba(0, 0, 0, 0.1);
@@ -355,16 +378,15 @@ header img {
 }
 
 /*
-	padding-left: 15px;
-	border-left: 1.5px solid rgba(0, 0, 0, 0.1);
 	==================================================
 	Footer
 	==================================================
 */
 
 footer {
-	font-weight: 700;
-	font-style: italic;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: -0.5px;
 	text-align: center;
 }
 
@@ -372,4 +394,16 @@ footer a {
 	font-style: normal;
 	text-decoration: none;
 	color: #6cc8ff;
+}
+
+#btn-up {
+	position: absolute;
+	top: 32.5px;
+	right: 60px;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	background: rgb(244,244,244);
+	border: none;
+	border-radius: 4px;
 }
