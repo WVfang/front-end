@@ -28,6 +28,12 @@ body {
 }
 
 /*
+#page-wrapper {
+	width: 1260px;
+	margin: 0 auto;
+}*/
+
+/*
 	==================================================
 	Backgrounds
 	==================================================
@@ -51,12 +57,18 @@ header {
 	==================================================
 */
 
+#page-wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
 .main-container {
 	position: relative;
 	max-width: 1260px;
 	min-width: 630px;
 	margin: 0 auto;
-	padding: 160px;
+	padding-left: 160px;
+	padding-right: 160px;
 	overflow: hidden;
 }
 
@@ -69,20 +81,20 @@ header {
 
 .content-1-container {
 	height: 650px;
-	padding-top: 130px;
+	padding-top: 120px;
 	padding-bottom: 150px;
 	color: rgba(0, 0, 0, 0.45);
 }
 
 .content-2-container {
 	height: 650px;
-	padding-top: 90px;
+	padding-top: 80px;
 	color: rgba(0, 0, 0, 0.45);
 }
 
 .donations-container {
 	height: 326px;
-	padding-top: 80px;
+	padding-top: 72px;
 	color: #fff;
 }
 
@@ -105,8 +117,8 @@ header {
 */
 
 .btn {
-	padding-bottom: 18px;
-	padding-top: 18px;
+	padding-bottom: 16.5px;
+	padding-top: 16.5px;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: 0px;
@@ -148,8 +160,8 @@ header {
 }
 
 .btn-donations {
-	padding-left: 35px;
-	padding-right: 35px;
+	padding-left: 37.5px;
+    padding-right: 37.5px;
 	color: #fff;
 	border-color: #fff;
 }
@@ -174,19 +186,19 @@ h1 {
 }
 
 h2, h3 {
-	font-size: 36px;
-	font-weight: 300;
+	font-size: 40px;
+	font-weight: 400;
 }
 
 h2 {
 	letter-spacing: -1px;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 	color: rgba(0, 0, 0, 0.7);
+	white-space: nowrap;
 }
 
 h3 {
 	letter-spacing: 0.25px;
-    font-size: 37px;
 }
 
 p {
@@ -232,15 +244,15 @@ button {
 }
 
 #header-content p {
-	margin-top: 30px;
+	margin-top: 23px;
 	font-size: 32px;
 	font-weight: 200;
-	line-height: 17px;
+	line-height: 34px;
 	letter-spacing: 0px;
 }
 
 .btn-header {
-	margin-top: 34px;
+	margin-top: 24px;
 	margin-right: 5px;
 }
 
@@ -303,7 +315,7 @@ header img {
 }
 
 .btn-donations {
-	margin-top: 26px;
+	margin-top: 16.5px;
 }
 
 /*
@@ -405,56 +417,5 @@ footer a {
 	background: rgb(244,244,244);
 	border: none;
 	border-radius: 4px;
-}
-
-/*
-	==================================================
-	Responsive
-	==================================================
-*/
-
-
-@media screen and (max-width: 1080px) {
-	#header-content-p-last-text {
-		display: block;
-		margin-top: 20px;
-	}
-}
-
-@media screen and (max-width: 1024px) {
-
-	.main-container{
-		padding-right: 80px;
-		padding-left: 80px;
-	}
-
-	header img {
-		left: 145.75px;
-	}
-}
-
-@media screen and (max-width: 920px) {
-	#content-1 img {
-		right: -150px;
-	}
-}
-
-@media screen and (max-width: 768px) {
-
-	.main-container {
-		padding-right: 20px;
-		padding-left: 20px;
-	}
-
-	header img {
-		left: 120.75px;
-	}
-	
-	.content-1-content {
-   		width: 60%;
-	}
-
-	#content-1 img {
-		right: -150px;
-	}
+    outline: none;
 }
