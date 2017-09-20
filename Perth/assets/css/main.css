@@ -11,10 +11,6 @@ body {
 	padding: 0;
 }
 
-header, #content-1, #content-2, footer {
-	position: relative;
-}
-
 .images {
 	position: absolute;
 }
@@ -56,7 +52,10 @@ header {
 */
 
 .main-container {
-	width: 1260px;
+	position: relative;
+	max-width: 1260px;
+	min-width: 630px;
+	margin: 0 auto;
 	padding: 160px;
 	overflow: hidden;
 }
@@ -236,7 +235,7 @@ button {
 	margin-top: 30px;
 	font-size: 32px;
 	font-weight: 200;
-	line-height: 17.5px;
+	line-height: 17px;
 	letter-spacing: 0px;
 }
 
@@ -247,7 +246,7 @@ button {
 
 header img {
 	top: 385px;
-	left: 230px;
+	left: 226.5px;
 }
 
 /*
@@ -406,4 +405,56 @@ footer a {
 	background: rgb(244,244,244);
 	border: none;
 	border-radius: 4px;
+}
+
+/*
+	==================================================
+	Responsive
+	==================================================
+*/
+
+
+@media screen and (max-width: 1080px) {
+	#header-content-p-last-text {
+		display: block;
+		margin-top: 20px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+
+	.main-container{
+		padding-right: 80px;
+		padding-left: 80px;
+	}
+
+	header img {
+		left: 145.75px;
+	}
+}
+
+@media screen and (max-width: 920px) {
+	#content-1 img {
+		right: -150px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+
+	.main-container {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+
+	header img {
+		left: 120.75px;
+	}
+	
+	.content-1-content {
+   		width: 60%;
+	}
+
+	#content-1 img {
+		right: -150px;
+	}
 }
