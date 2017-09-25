@@ -1,0 +1,67 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	text-align: center;
+}
+
+#image-wrapper {
+	position: relative;
+	width: 570px;
+	height: 374px;
+	margin: 0 auto;
+}
+
+.draggable-phrase {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100px;
+	max-width: 300px;
+	min-height: 32px; /*depends on font-size*/
+	padding: 5px 10px;
+	border: 2px solid #fff;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.5);
+	z-index: 5;
+    cursor: move;
+}
+
+.draggable-phrase:after,
+.my-text-box:after {
+	position: absolute;
+	bottom: -15px;
+	right: 5px;
+	content: "";
+	width: 0;
+	height: 0;
+	border-left: 7.5px solid transparent;
+	border-right: 7.5px solid transparent;
+	border-top: 15px solid #fff;
+}
+
+.draggable-phrase:active { 
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.my-text-box {
+	position: absolute;
+	width: 200px;
+	padding: 5px 10px;
+	border: 2px solid #fff;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.5);
+	font-family: "Times New Roman";
+	font-size: 16px;
+	text-align: center;
+	resize: none;
+	outline: none;
+}

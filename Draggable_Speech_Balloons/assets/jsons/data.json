@@ -1,0 +1,26 @@
+[
+    {
+        "id": "0",
+        "content": "Hello world!",
+        "leftOffset": "31",
+        "topOffset": "40"
+    },
+    {
+        "id": "1",
+        "content": "Hello world!",
+        "leftOffset": "186",
+        "topOffset": "76"
+    },
+    {
+        "id": "2",
+        "content": "Hello world!",
+        "leftOffset": "319",
+        "topOffset": "133"
+    },
+    {
+        "id": "3",
+        "content": "Hello world!",
+        "leftOffset": "427",
+        "topOffset": "193"
+    }
+]
