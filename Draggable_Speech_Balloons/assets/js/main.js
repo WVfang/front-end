@@ -14,21 +14,28 @@ $(document).ready(function() {
 	$.getJSON("assets/jsons/data.json", {}, function(data) {
 
 		// Find the length of the object
-	
-	    if(!data.length > 0) {
+		var dataLength = 0, key;
+		for (key in data) {
+	        if (data.hasOwnProperty(key)) {
+	        	dataLength++;
+	    	}
+	    }
+
+	    if(!dataLength > 0) {
 			console.log("Data storage is empty");
 			return;
 		}
 
-		messageId = parseInt(data[data.length-1]["id"]) + 1;
+		var dataKeys = Object.keys(data);
+		messageId = parseInt(dataKeys[dataKeys.length-1].replace(/mes/, "")) + 1;
 
 		// Add divs into image-wrapper, set their position, add listener and make them editable
-		for(var i = 0; i < data.length; i++) {
-			$("#image-wrapper").append("<div id=\"" + data[i]["id"] + "\" class=\"draggable-phrase\" draggable=\"true\">" + data[i]["content"] + "</div>");
+		for(var i = 0; i < dataLength; i++) {
+			$("#image-wrapper").append("<div id=\"" + data[dataKeys[i]]["id"] + "\" class=\"draggable-phrase\" draggable=\"true\">" + data[dataKeys[i]]["content"] + "</div>");
 			$("#image-wrapper .draggable-phrase:last-child")
 				.css({
-					"left": data[i]["leftOffset"] + 'px',
-					"top": data[i]["topOffset"] + 'px'
+					"left": data[dataKeys[i]]["leftOffset"] + 'px',
+					"top": data[dataKeys[i]]["topOffset"] + 'px'
 				})
 				.on("dragstart", drag_start)
 				.editable();
@@ -139,9 +146,7 @@ $(document).ready(function() {
 			messageData.removing = true;
 		}
 
-		$.post("assets/php/data_save.php", messageData, function(data) {
-			//console.log(data);
-		});
+		$.post("assets/php/data_save.php", messageData);
 	}
 
 	// Function on double click on draggable div
@@ -166,21 +171,21 @@ $(document).ready(function() {
 
 	        // Hiding the input and showing the original div
 	        textBox.keypress(function() {
-
 	        	if(event.keyCode == 13) {
 	        		$(this).blur();
 	        		return false;
 	        	}
+	        });
+
+	        textBox.keyup(function() {
 	        	if(event.keyCode == 27) {
 	        		$(this).val($(this).prev().html());
 	        		$(this).blur();
 	        		return false;
 	        	}
-		      
-	        })
+	        });
 
 	        textBox.blur(function(event) {
-	        	console.log(event);
 	            toggleVisiblity($(this), false); // pass the input that loses focus via $(this)
 	        });
 

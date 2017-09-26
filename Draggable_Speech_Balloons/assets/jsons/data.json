@@ -1,14 +1,26 @@
-[
-    {
-        "id": "0",
-        "content": "Hello world!",
-        "leftOffset": "346",
-        "topOffset": "140"
+{
+    "mes4": {
+        "id": "4",
+        "content": "Hello man, Do you see me?",
+        "leftOffset": "260",
+        "topOffset": "233"
     },
-    {
-        "id": "1",
+    "mes5": {
+        "id": "5",
         "content": "Hello world!",
-        "leftOffset": "239",
-        "topOffset": "243"
+        "leftOffset": "436",
+        "topOffset": "64"
+    },
+    "mes6": {
+        "id": "6",
+        "content": "It's new div",
+        "leftOffset": "130",
+        "topOffset": "153"
+    },
+    "mes8": {
+        "id": "8",
+        "content": "It's another div",
+        "leftOffset": "282",
+        "topOffset": "113"
     }
-]
+}
