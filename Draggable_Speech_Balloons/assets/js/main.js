@@ -151,10 +151,8 @@ $(document).ready(function() {
 			var textBlocks = $(this);
 			var textBox = $(this).next();
 
-
-			
 	        // Create a new input for every div that is selected
-	        for(var i = 0; i < textBlocks.length; i+=1){
+	        for(var i = 0; i < textBlocks.length; i+=1) {
 	            var textBox = $('<textarea class="my-text-box"></textarea>');
 	            var textBlock = textBlocks.eq(i);               
 	            textBox.hide().insertAfter(textBlock).val(textBlock.html());
@@ -167,9 +165,7 @@ $(document).ready(function() {
 
 
 	        // Hiding the input and showing the original div
-	        $(".my-text-box").keypress(function() {
-
-	        	console.log("Hello world!");
+	        textBox.keypress(function() {
 
 	        	if(event.keyCode == 13) {
 	        		$(this).blur();
@@ -183,13 +179,12 @@ $(document).ready(function() {
 		      
 	        })
 
-	        $(".my-text-box").blur(function() {
+	        textBox.blur(function(event) {
+	        	console.log(event);
 	            toggleVisiblity($(this), false); // pass the input that loses focus via $(this)
 	        });
 
 	        toggleVisiblity = function(element, editMode) {
-
-	        	console.log("Hello world");
 
 	            var textBlock, textBox;
 
