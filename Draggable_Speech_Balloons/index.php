@@ -4,7 +4,39 @@
 	<title></title>
 	<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="assets/js/main.js"></script>
+	<!--<script type="text/javascript" src="http://www.xiper.net/examples/js-plugins/forms/autoresize/js/autoresize.jquery.js"></script>-->
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+	<script>
+		function resizeArea(elem_id, minHeight, maxHeight) {
+
+		   var area = $("#" + elem_id);
+		   var area_hidden = $("#" + elem_id + "_hidden");
+		   var text = '';
+
+		   var lines = area.val().replace(/[<>]/g, '_').split("\n")
+
+		   $.each(lines, function(key, value) {
+		           text = text + '<div>' + value.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
+		   });
+
+		   area_hidden.text(lines);
+		   var height = area_hidden[0].offsetHeight + 15;
+		   height = Math.max(minHeight, height);
+		   height = Math.min(maxHeight, height);
+
+		   //console.log(area[0].scrollHeight);
+		   
+		   if(+event.path[0].style.top.replace(/px/, "") + height > maxHeight) {
+		    	event.path[0].style.top =  (maxHeight - height) + 'px';
+		   }
+		  
+		   
+
+		   area[0].style.height = height + 'px';
+		}
+	</script>
+
 </head>
 <body>
 	<div id="image-wrapper">

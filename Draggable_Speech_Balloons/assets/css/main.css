@@ -11,6 +11,10 @@ body {
 	text-align: center;
 }
 
+input {
+	width: 0;
+}
+
 #image-wrapper {
 	position: relative;
 	width: 570px;
@@ -22,23 +26,23 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	min-width: 100px;
-	max-width: 300px;
-	min-height: 32px; /*depends on font-size*/
+	
+	width: 200px;
+	
 	padding: 5px 10px;
 	border: 2px solid #fff;
 	border-radius: 4px;
 	background: rgba(255, 255, 255, 0.5);
 	z-index: 5;
     cursor: move;
+	line-height: 1.125;
 }
 
-.draggable-phrase:after,
-.my-text-box:after {
+.draggable-phrase:after {
 	position: absolute;
+	content: "";
 	bottom: -15px;
 	right: 5px;
-	content: "";
 	width: 0;
 	height: 0;
 	border-left: 7.5px solid transparent;
@@ -46,15 +50,11 @@ body {
 	border-top: 15px solid #fff;
 }
 
-.draggable-phrase:active { 
-    cursor: grabbing;
-    cursor: -moz-grabbing;
-    cursor: -webkit-grabbing;
-}
-
-.my-text-box {
+.draggable-phrase-input {
 	position: absolute;
+	
 	width: 200px;
+	
 	padding: 5px 10px;
 	border: 2px solid #fff;
 	border-radius: 4px;
@@ -64,4 +64,6 @@ body {
 	text-align: center;
 	resize: none;
 	outline: none;
+	overflow: hidden;
+	line-height: 1.125;
 }

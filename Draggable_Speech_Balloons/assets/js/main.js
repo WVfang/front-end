@@ -71,9 +71,9 @@ $(document).ready(function() {
 
 		// Limits of left and top offset those depend on wrapper's(img) width/height and draggable element's widht/height
 		var maxAllowedWidth = parseFloat(window.getComputedStyle(event.path[1], null).getPropertyValue("width")) - 
-							  parseFloat(window.getComputedStyle(selectedMessage, null).getPropertyValue("width"));
+							  parseFloat(window.getComputedStyle(dragElem, null).getPropertyValue("width"));
 		var maxAllowedHeight = parseFloat(window.getComputedStyle(event.path[1], null).getPropertyValue("height")) - 
-							  (parseFloat(window.getComputedStyle(selectedMessage, null).getPropertyValue("height")) + 15); // + 15px for message "corner" at the bottom 
+							  (parseFloat(window.getComputedStyle(dragElem, null).getPropertyValue("height")) + 15); // + 15px for message "corner" at the bottom 
 
 		var leftOffset = checkForOccurrenceInTheInterval(leftOffset, 0, maxAllowedWidth);
 		var topOffset = checkForOccurrenceInTheInterval(topOffset, 0, maxAllowedHeight);
@@ -158,9 +158,32 @@ $(document).ready(function() {
 
 	        // Create a new input for every div that is selected
 	        for(var i = 0; i < textBlocks.length; i+=1) {
-	            var textBox = $('<textarea class="my-text-box"></textarea>');
-	            var textBlock = textBlocks.eq(i);               
+	            var textBlock = textBlocks.eq(i);  
+
+	            // Input creating
+	            var textBox = $('<textarea id=' + "input_" + textBlocks[0].id 
+	            	+ ' class="draggable-phrase-input"></textarea>');
+	        	
+	        	textBox.bind("keyup", function() {
+
+	        		var textBoxMaxHeight = getComputedStyle($("#image-wrapper")[0], null).getPropertyValue("height").replace(/px/, "") 
+	        							//- getComputedStyle(textBlock[0], null).getPropertyValue("top").replace(/px/, "")
+	        							- 15;
+
+	        		resizeArea(textBox[0].id, 32, textBoxMaxHeight);
+	        	});//.keydown(limitTextarea);
+		           
+
+	        	// Hidden div (for dynamic height of text area)
+	            var textBoxHidden = $('<div id=' + "input_" + textBlocks[0].id 
+	            	+ "_hidden" + ' class="draggable-phrase-input"></div>')
+	            	.css({
+	            		"visibility": "",
+	            		"position": "absolute"
+	            	});       
+
 	            textBox.hide().insertAfter(textBlock).val(textBlock.html());
+	            textBoxHidden.insertAfter(textBox);
 	        }
 
 	        // Hiding the div and showing an input to allow editing the value.
@@ -197,17 +220,19 @@ $(document).ready(function() {
 	                textBlock = element; // here the element is the div
 
 	                var position = textBlock.position();
-	                var width = textBlock[0].offsetWidth;
-	                var height = textBlock[0].offsetHeight;
+	                var width = getComputedStyle(textBlock[0], null).getPropertyValue("width");
+	                var height = getComputedStyle(textBlock[0], null).getPropertyValue("height");
 
 	                textBox = element.next(); // here element is the div so the textbox is next
 	                textBlock.hide();
 	                textBox.show().focus(); 
 
-	                textBox[0].style.width = width + 'px'; 
-	                textBox[0].style.height = height + 'px';
-	                textBox[0].style.top = position["top"] + 'px';
-	                textBox[0].style.left =  position["left"] + 'px';
+	                textBoxStyle = textBox[0].style;
+
+	                textBoxStyle.width = width; 
+	                textBoxStyle.height = height;
+	                textBoxStyle.top = position["top"] + 'px';
+	                textBoxStyle.left =  position["left"] + 'px';
 
 	                // workaround, to move the cursor at the end in input box.
 	                textBox[0].value = textBox[0].value;
@@ -219,8 +244,9 @@ $(document).ready(function() {
 
 	                if(textBox.val() == "") {
 	                	var removing = true;
-	                	textBlock[0].remove();
 	                	textBlock.next().remove();
+	                	textBlock.next().remove();
+	                	textBlock.remove();
 	                }
 
 	                textBlock.html(textBox.val());
@@ -231,4 +257,7 @@ $(document).ready(function() {
 	        };
         };
 	})(jQuery);
+
+
+
 });
