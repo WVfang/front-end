@@ -1,7 +1,7 @@
 // Update jsonData when user edits or moves draggable divs 
 function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 
-	if(!(typeof parseInt(id) == "number") &&  parseInt(id) <= 0) {
+	if(!(typeof parseInt(id) == "number") || parseInt(id) < 0) {
 		console.log("Incorrect data");
 		console.log(id + ": " + typeof id);
 		return;
@@ -13,8 +13,8 @@ function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 		return;
 	}
 
-	if((!(typeof leftOffset == "number" || typeof leftOffset == "undefined") && leftOffset < 0) ||
-		(!(typeof topOffset == "number" || typeof topOffset == "undefined") && topOffset < 0)) {
+	if((!(typeof leftOffset == "number" || typeof leftOffset == "undefined") || leftOffset < 0) ||
+		(!(typeof topOffset == "number" || typeof topOffset == "undefined") || topOffset < 0)) {
 		console.log("Incorrect data");
 		console.log(leftOffset + ": " + typeof leftOffset);
 		console.log(topOffset + ": " + typeof topOffset);

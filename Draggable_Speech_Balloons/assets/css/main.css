@@ -15,7 +15,7 @@ input {
 	width: 0;
 }
 
-#image-wrapper {
+#drag-space {
 	position: relative;
 	width: 570px;
 	height: 374px;
@@ -26,9 +26,9 @@ input {
 	position: absolute;
 	top: 0;
 	left: 0;
-	
-	width: 200px;
-	
+	min-width: 100px;
+	max-width: 300px;
+	min-height: 32px;
 	padding: 5px 10px;
 	border: 2px solid #fff;
 	border-radius: 4px;
@@ -52,11 +52,11 @@ input {
 
 .draggable-phrase-input {
 	position: absolute;
-	
-	width: 200px;
-	
+	min-width: 100px;
+	max-width: 300px;
+	min-height: 32px;
 	padding: 5px 10px;
-	border: 2px solid #fff;
+	border: 2px solid #000;
 	border-radius: 4px;
 	background: rgba(255, 255, 255, 0.5);
 	font-family: "Times New Roman";
@@ -66,4 +66,5 @@ input {
 	outline: none;
 	overflow: hidden;
 	line-height: 1.125;
+	white-space: pre-line;
 }
