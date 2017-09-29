@@ -3,17 +3,18 @@
 function resizeArea(elem_id, maxHeight) {
 
     var area = $("#" + elem_id);
+    var area_tail = area.next();
     var area_hidden = $("#" + elem_id + "_hidden");
     var text = '';
 
-    // delete last symbol if maxHeight reached
+    // Forbid input if new symbol increase message beyond maxHeight
     if(area[0].scrollHeight > maxHeight) {
         area.val(area.val().substring(0, area.val().length - 1));
         console.log("The limit of symbols is reached");
         return false;
     }
 
-    // split text into lines and insert it into hidden text area
+    // Split text into lines and insert it into hidden text area to count new message height
     var lines = area.val().replace(/[<>]/g, '_').split("\n");
     $.each(lines, function(key, value) {
         text = text + '<div>' + value.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
@@ -26,8 +27,8 @@ function resizeArea(elem_id, maxHeight) {
 
     var position = area.position();
     var height = area_hidden.outerHeight() + 15;
-    height = Math.min(maxHeight, height);
-    var width = area_hidden.outerWidth();
+        height = Math.min(maxHeight, height); // height can differ (it depends on dragSpace height)
+    var width = area_hidden.outerWidth(); // limited by css (100-300px)
 
     // If message block is at the bottom border of drag space
     if(position["top"] + height > dragSpaceHeight) {
@@ -35,6 +36,7 @@ function resizeArea(elem_id, maxHeight) {
 
         area.css("top", topOffset);
         area.prev().css("top", topOffset);
+
         updatingJsonData(area.prev()[0].id, undefined,  undefined, topOffset);
     }
 
@@ -44,11 +46,16 @@ function resizeArea(elem_id, maxHeight) {
 
         area.css("left", leftOffset);
         area.prev().css("left", leftOffset);
+
         updatingJsonData(area.prev()[0].id, undefined,  leftOffset, undefined);
     }
 
     area[0].style.width = width + 'px';
     area[0].style.height = height + 'px';
+
+    // Update textarea "message-tail" position
+    area_tail[0].style.top = (area.position()["top"] + height) + 'px';
+    area_tail[0].style.left = (area.position()["left"] + width - 25) + 'px';
 
     return true;
 }
@@ -57,48 +64,52 @@ function resizeArea(elem_id, maxHeight) {
     $.fn.editable = function() {
 
         var textBlocks = $(this);
-        var textBox = $(this).next();
+        var textArea = $(this).next();
 
-        // Create a new input for every div that is selected
+        // Create a new textarea for every selected div
         for(var i = 0; i < textBlocks.length; i+=1) {
             var textBlock = textBlocks.eq(i);
 
             // Textarea creating
-            var textBox = $('<textarea id=' + "input_" + textBlocks[0].id 
+            var textArea = $("<textarea id=" + "input_" + textBlocks[0].id 
                 + ' class="draggable-phrase-input"></textarea>');
 
-            textBox.bind("input propertychange", function() {
-                var textBoxMaxHeight = $("#drag-space").height() - 15;
-                return resizeArea(textBox[0].id, textBoxMaxHeight);
+            textArea.bind("input propertychange", function() {
+                var textAreaMaxHeight = $("#drag-space").height() - 15;
+                return resizeArea(textArea[0].id, textAreaMaxHeight);
             });
 
-            // Hidden textarea(div) creating (for dynamic height of textarea)
-            var textBoxHidden = $('<div id=' + "input_" + textBlocks[0].id 
+            // Message tail creating
+            var textAreaTail = $('<div class="draggable-phrase-tail"></div>');
+
+            // Hidden div creating (for dynamic width/height of textarea)
+            var textAreaHidden = $("<div id=" + "input_" + textBlocks[0].id 
                 + "_hidden" + ' class="draggable-phrase-input"></div>')
-            .css({
-                "visibility": "hidden",
-                "position": "absolute"
+                .css({
+                    "visibility": "hidden",
+                    "position": "absolute"
             });       
 
-            textBox.hide().insertAfter(textBlock).val(textBlock.html());
-            textBoxHidden.insertAfter(textBox);
+            textArea.hide().insertAfter(textBlock).val(textBlock.html());
+            textAreaTail.hide().insertAfter(textArea);
+            textAreaHidden.insertAfter(textAreaTail);
         }
 
         // Hiding the div and showing an input to allow editing the value.
         textBlocks.dblclick(function() {
-            toggleVisiblity($(this), true); // pass the dbl clicked div element via $(this) 
+            toggleVisiblity($(this), true);
         });
 
 
         // Hiding the input and showing the original div
-        textBox.keypress(function(event) {
+        textArea.keypress(function(event) {
             if(event.keyCode == 13) {
                 $(this).blur();
                 return false;
             }
         });
 
-        textBox.keyup(function(event) {
+        textArea.keyup(function(event) {
             if(event.keyCode == 27) {
                 $(this).val($(this).prev().html());
                 $(this).blur();
@@ -106,13 +117,13 @@ function resizeArea(elem_id, maxHeight) {
             }
         });
 
-        textBox.blur(function(event) {
-            toggleVisiblity($(this), false); // pass the input that loses focus via $(this)
+        textArea.blur(function(event) {
+            toggleVisiblity($(this), false);
         });
 
         toggleVisiblity = function(element, editMode) {
 
-            var textBlock, textBox;
+            var textBlock, textArea;
 
             if (editMode === true) {
                 textBlock = element; // here the element is the div
@@ -121,35 +132,45 @@ function resizeArea(elem_id, maxHeight) {
                 var width = textBlock.outerWidth();
                 var height = textBlock.outerHeight();
 
-                textBox = element.next(); // here element is the div so the textbox is next
+                textArea = element.next(); // here element is the div so the textarea is next
+                textAreaTail = textArea.next();
                 textBlock.hide();
-                textBox.show().focus(); 
+                textArea.show().focus(); 
+                textAreaTail.show();
 
-                textBoxStyle = textBox[0].style;
-                textBoxStyle.width = width + 'px'; 
-                textBoxStyle.height = height + 'px';
-                textBoxStyle.top = position["top"] + 'px';
-                textBoxStyle.left =  position["left"] + 'px';
+                textAreaStyle = textArea[0].style;
+                textAreaStyle.width = width + 'px'; 
+                textAreaStyle.height = height + 'px';
+                textAreaStyle.top = position["top"] + 'px';
+                textAreaStyle.left =  position["left"] + 'px';
+
+                textAreaTailStyle = textAreaTail[0].style;
+                textAreaTailStyle.top = (position["top"] + height - 2.5) + 'px';
+                textAreaTailStyle.left = (position["left"] + width - 25) + 'px'; 
 
                 // Workaround, to move the cursor at the end in input box.
-                textBox[0].value = textBox[0].value;
+                textArea[0].value = textArea[0].value;
             } else {
                 textBlock = element.prev(); // here element is the input so the div is previous
-                textBox = element; // here element is the textbox
+                textArea = element; // here element is the textazrea
+                textAreaTail = element.next();
                 textBlock.show();
-                textBox.hide();
+                textArea.hide();
+                textAreaTail.hide();
 
-                if(textBox.val() == "") {
+                // Delete message block if it's empty
+                if(textArea.val() == "") {
                     var removing = true;
-                    textBlock.next().remove();
-                    textBlock.next().remove();
-                    textBlock.remove();
+                    textBlock.next().remove(); // remove textarea
+                    textBlock.next().remove(); // remove textarea tail
+                    textBlock.next().remove(); // remove hidden div
+                    textBlock.remove(); // remove textblock
+                } else {
+                  textBlock.html(textArea.val());
                 }
 
-                textBlock.html(textBox.val());
-
-                /* Updating data of content of draggable elements */
-                updatingJsonData(textBlock[0].id, textBox.val(), undefined, undefined, removing);
+                // Updating data of content of draggable element
+                updatingJsonData(textBlock[0].id, textArea.val(), undefined, undefined, removing);
             }
         };
     };

@@ -17,7 +17,7 @@ function drop(event) {
 
 	// Limits of left and top offset those depend on wrapper's(img) width/height and draggable element's widht/height
 	var dragElem = $("#" + selectedMesId);
-	var dragSpace = $("#image-wrapper");
+	var dragSpace = $("#drag-space");
 	var maxAllowedWidth = dragSpace.width() - dragElem.outerWidth();
 	var maxAllowedHeight = dragSpace.height() - dragElem.outerHeight() - 15; // + 15px for message "corner" at the bottom 
 
