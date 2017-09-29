@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 </head>
 <body>
-	<div id="drag-space" onselectstart="return false" onmousedown="return false">
+	<div id="drag-space" onselectstart="return false">
 		<img src="assets/img/crowd.jpg" draggable="false">
 	</div>
 	<button id="btn-add-div">Add new div</button>

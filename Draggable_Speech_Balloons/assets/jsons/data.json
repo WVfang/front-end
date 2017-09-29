@@ -1,1 +1,14 @@
-[]
+{
+    "mes2": {
+        "id": "2",
+        "content": "Hello world!",
+        "leftOffset": "338",
+        "topOffset": "136"
+    },
+    "mes3": {
+        "id": "3",
+        "content": "Hello world",
+        "leftOffset": "132",
+        "topOffset": "175"
+    }
+}

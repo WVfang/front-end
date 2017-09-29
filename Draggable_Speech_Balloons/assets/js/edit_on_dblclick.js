@@ -1,65 +1,5 @@
 // Function on double click on draggable div
 
-function resizeArea(elem_id, maxHeight) {
-
-    var area = $("#" + elem_id);
-    var area_tail = area.next();
-    var area_hidden = $("#" + elem_id + "_hidden");
-    var text = '';
-
-    // Forbid input if new symbol increase message beyond maxHeight
-    if(area[0].scrollHeight > maxHeight) {
-        area.val(area.val().substring(0, area.val().length - 1));
-        console.log("The limit of symbols is reached");
-        return false;
-    }
-
-    // Split text into lines and insert it into hidden text area to count new message height
-    var lines = area.val().replace(/[<>]/g, '_').split("\n");
-    $.each(lines, function(key, value) {
-        text = text + '<div>' + value.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
-    });
-    area_hidden.text(lines);
-
-    var dragSpace = $("#drag-space");
-    var dragSpaceWidth = dragSpace.width();
-    var dragSpaceHeight = dragSpace.height() - 15;
-
-    var position = area.position();
-    var height = area_hidden.outerHeight() + 15;
-        height = Math.min(maxHeight, height); // height can differ (it depends on dragSpace height)
-    var width = area_hidden.outerWidth(); // limited by css (100-300px)
-
-    // If message block is at the bottom border of drag space
-    if(position["top"] + height > dragSpaceHeight) {
-        var topOffset = dragSpaceHeight - height;
-
-        area.css("top", topOffset);
-        area.prev().css("top", topOffset);
-
-        updatingJsonData(area.prev()[0].id, undefined,  undefined, topOffset);
-    }
-
-    // If message block at the right border of drag space
-    if(position["left"] + width > dragSpaceWidth) {
-        var leftOffset = dragSpaceWidth - width;
-
-        area.css("left", leftOffset);
-        area.prev().css("left", leftOffset);
-
-        updatingJsonData(area.prev()[0].id, undefined,  leftOffset, undefined);
-    }
-
-    area[0].style.width = width + 'px';
-    area[0].style.height = height + 'px';
-
-    // Update textarea "message-tail" position
-    area_tail[0].style.top = (area.position()["top"] + height) + 'px';
-    area_tail[0].style.left = (area.position()["left"] + width - 25) + 'px';
-
-    return true;
-}
-
 (function($) {
     $.fn.editable = function() {
 
@@ -148,8 +88,8 @@ function resizeArea(elem_id, maxHeight) {
                 textAreaTailStyle.top = (position["top"] + height - 2.5) + 'px';
                 textAreaTailStyle.left = (position["left"] + width - 25) + 'px'; 
 
-                // Workaround, to move the cursor at the end in input box.
-                textArea[0].value = textArea[0].value;
+                // Move the cursor at the end in input box.
+                moveCaretToEnd(textArea);
             } else {
                 textBlock = element.prev(); // here element is the input so the div is previous
                 textArea = element; // here element is the textazrea
@@ -175,3 +115,70 @@ function resizeArea(elem_id, maxHeight) {
         };
     };
 })(jQuery);
+
+function resizeArea(elem_id, maxHeight) {
+
+    var area = $("#" + elem_id);
+    var area_tail = area.next();
+    var area_hidden = $("#" + elem_id + "_hidden");
+    var text = '';
+
+    // Forbid input if new symbol increase message beyond maxHeight
+    if(area[0].scrollHeight > maxHeight) {
+        area.val(area.val().substring(0, area.val().length - 1));
+        console.log("The limit of symbols is reached");
+        return false;
+    }
+
+    // Split text into lines and insert it into hidden text area to count new message height
+    var lines = area.val().replace(/[<>]/g, '_').split("\n");
+    $.each(lines, function(key, value) {
+        text = text + '<div>' + value.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
+    });
+    area_hidden.text(lines);
+
+    var dragSpace = $("#drag-space");
+    var dragSpaceWidth = dragSpace.width();
+    var dragSpaceHeight = dragSpace.height() - 15;
+
+    var position = area.position();
+    var height = area_hidden.outerHeight() + 15;
+        height = Math.min(maxHeight, height); // height can differ (it depends on dragSpace height)
+    var width = area_hidden.outerWidth(); // limited by css (100-300px)
+
+    // If message block is at the bottom border of drag space
+    if(position["top"] + height > dragSpaceHeight) {
+        var topOffset = dragSpaceHeight - height;
+
+        area.css("top", topOffset);
+        area.prev().css("top", topOffset);
+
+        updatingJsonData(area.prev()[0].id, undefined,  undefined, topOffset);
+    }
+
+    // If message block at the right border of drag space
+    if(position["left"] + width > dragSpaceWidth) {
+        var leftOffset = dragSpaceWidth - width;
+
+        area.css("left", leftOffset);
+        area.prev().css("left", leftOffset);
+
+        updatingJsonData(area.prev()[0].id, undefined,  leftOffset, undefined);
+    }
+
+    area[0].style.width = width + 'px';
+    area[0].style.height = height + 'px';
+
+    // Update textarea "message-tail" position
+    area_tail[0].style.top = (area.position()["top"] + height) + 'px';
+    area_tail[0].style.left = (area.position()["left"] + width - 25) + 'px';
+
+    return true;
+}
+
+function moveCaretToEnd(inputObject) {
+    if (inputObject.selectionStart) {
+        var end = inputObject.value.length;
+        inputObject.setSelectionRange(end,end);
+    }
+}
