@@ -3,40 +3,35 @@
 (function($) {
     $.fn.editable = function() {
 
-        var textBlocks = $(this);
-        var textArea = $(this).next();
+        var textBlock = $(this);
+        console.log(textBlock);
+  
+        // Textarea creating
+        var textArea = $("<textarea id=" + "input_" + textBlock[0].id 
+            + ' class="draggable-phrase-input"></textarea>');
 
-        // Create a new textarea for every selected div
-        for(var i = 0; i < textBlocks.length; i+=1) {
-            var textBlock = textBlocks.eq(i);
+        textArea.bind("input propertychange", function() {
+            var textAreaMaxHeight = $("#drag-space").height() - 15;
+            return resizeArea(textArea[0].id, textAreaMaxHeight);
+        });
 
-            // Textarea creating
-            var textArea = $("<textarea id=" + "input_" + textBlocks[0].id 
-                + ' class="draggable-phrase-input"></textarea>');
+        // Message tail creating
+        var textAreaTail = $('<div class="draggable-phrase-tail"></div>');
 
-            textArea.bind("input propertychange", function() {
-                var textAreaMaxHeight = $("#drag-space").height() - 15;
-                return resizeArea(textArea[0].id, textAreaMaxHeight);
-            });
+        // Hidden div creating (for dynamic width/height of textarea)
+        var textAreaHidden = $("<div id=" + "input_" + textBlock[0].id 
+            + "_hidden" + ' class="draggable-phrase-input"></div>')
+            .css({
+                "visibility": "hidden",
+                "position": "absolute"
+        });       
 
-            // Message tail creating
-            var textAreaTail = $('<div class="draggable-phrase-tail"></div>');
-
-            // Hidden div creating (for dynamic width/height of textarea)
-            var textAreaHidden = $("<div id=" + "input_" + textBlocks[0].id 
-                + "_hidden" + ' class="draggable-phrase-input"></div>')
-                .css({
-                    "visibility": "hidden",
-                    "position": "absolute"
-            });       
-
-            textArea.hide().insertAfter(textBlock).val(textBlock.html());
-            textAreaTail.hide().insertAfter(textArea);
-            textAreaHidden.insertAfter(textAreaTail);
-        }
-
+        textArea.hide().insertAfter(textBlock).val(textBlock.html());
+        textAreaTail.hide().insertAfter(textArea);
+        textAreaHidden.insertAfter(textAreaTail);
+    
         // Hiding the div and showing an input to allow editing the value.
-        textBlocks.dblclick(function() {
+        textBlock.dblclick(function() {
             toggleVisiblity($(this), true);
         });
 
@@ -69,8 +64,8 @@
                 textBlock = element; // here the element is the div
 
                 var position = textBlock.position();
-                var width = textBlock.outerWidth();
-                var height = textBlock.outerHeight();
+                var width = textBlock.width();
+                var height = textBlock.height();
 
                 textArea = element.next(); // here element is the div so the textarea is next
                 textAreaTail = textArea.next();
@@ -142,9 +137,9 @@ function resizeArea(elem_id, maxHeight) {
     var dragSpaceHeight = dragSpace.height() - 15;
 
     var position = area.position();
-    var height = area_hidden.outerHeight() + 15;
+    var height = area_hidden.height() + 15;
         height = Math.min(maxHeight, height); // height can differ (it depends on dragSpace height)
-    var width = area_hidden.outerWidth(); // limited by css (100-300px)
+    var width = area_hidden.width(); // limited by css (100-300px)
 
     // If message block is at the bottom border of drag space
     if(position["top"] + height > dragSpaceHeight) {

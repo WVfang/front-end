@@ -20,7 +20,8 @@ function drop(event) {
 	var dragSpace = $("#drag-space");
 	var maxAllowedWidth = dragSpace.width() - dragElem.outerWidth();
 	var maxAllowedHeight = dragSpace.height() - dragElem.outerHeight() - 15; // + 15px for message "corner" at the bottom 
-
+	console.log(dragSpace.width() + " " + maxAllowedWidth);
+	console.log(dragSpace.height() + " " + maxAllowedHeight);
 	var leftOffset = checkForOccurrenceInTheInterval(leftOffset, 0, maxAllowedWidth);
 	var topOffset = checkForOccurrenceInTheInterval(topOffset, 0, maxAllowedHeight);
 	
