@@ -1,3 +1,9 @@
+/*
+    ========================================
+    Main
+    ========================================
+*/
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,6 +25,12 @@ header {
     padding: 10px 0;
 }
 
+/*
+    ========================================
+    Nav
+    ========================================
+*/
+
 nav {
     background-color: #1a4f95;
     overflow: hidden;
@@ -39,6 +51,12 @@ nav a.active {
     border-bottom: 2px solid #fff;
 }
 
+/*
+    ========================================
+    Content container
+    ========================================
+*/
+
 .container {
     width: 100%;
     margin: 0 auto;
@@ -50,6 +68,12 @@ nav a.active {
     display: block;
     clear: both;
 }
+
+/*
+    ========================================
+    Now
+    ========================================
+*/
 
 .all-50 {
     display: block;
@@ -76,6 +100,12 @@ nav a.active {
 .current-temperature {
     font-size: 400%;
 }
+
+/*
+    ========================================
+    Forecast
+    ========================================
+*/
 
 .hourly-forecast {
     border-bottom: 2px solid #30395a;
