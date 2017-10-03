@@ -2,12 +2,49 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather</title>
     <link rel="stylesheet" href="styles/app.css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand|Titillium+Web" rel="stylesheet">
+    <script type="text/javascript" src="http://stevenlevithan.com/assets/misc/date.format.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var data;
+
+            $.getJSON("data/today.json", function(data) {
+                
+                var dates = $(".forecast-date");
+                console.log(data);
+                var weathers = $(".forecast-weather");
+
+                //(new Date()).format("yyyy/mm/dd");
+                var today = new Date("Thu Feb 17 2017 12:00:00 GMT+0200 (FLE Standard Time)").format("yyyy/mm/dd");
+
+                var todayInfo = [];
+                for(var i = 0; i < data.length; i++) {
+                    var date = new Date(data["list"][i]["dt_txt"]);
+                    if(date.format("yyyy/mm/dd") == today) {
+                        dates.eq(index).html(date);
+                        index++;
+                    }
+                }
+
+                var index = 0;
+                for(var i = 0; i < dates.length; i++) {
+                    
+                    console.log(date.format("yyyy/mm/dd"));
+                }
+
+                //var date = new Date(Math.round(($.now() - date.getTime())/1000));
+                //date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+            });
+
+        });
+    </script>
 </head>
 <body>
 	<header>
@@ -39,7 +76,7 @@
 	        </div>
 	        <div class="forecast">
 	            <div class="hourly-forecast clearfix">
-	                <div class="forecast-date">14:00</div>
+	                <div class="forecast-date">00:00</div>
 	                <div class="forecast-weather">
 	                    <div class="forecast-temperature">25 &deg;</div>
 	                    <div class="forecast-icon">
@@ -50,7 +87,7 @@
 	                </div>
 	            </div>
 	            <div class="hourly-forecast clearfix">
-	                <div class="forecast-date">15:00</div>
+	                <div class="forecast-date">03:00</div>
 	                <div class="forecast-weather">
 	                    <div class="forecast-temperature">26 &deg;</div>
 	                    <div class="forecast-icon">
@@ -61,7 +98,7 @@
 	                </div>
 	            </div>
 	            <div class="hourly-forecast clearfix">
-	                <div class="forecast-date">16:00</div>
+	                <div class="forecast-date">06:00</div>
 	                <div class="forecast-weather">
 	                    <div class="forecast-temperature">26 &deg;</div>
 	                    <div class="forecast-icon">
@@ -72,7 +109,7 @@
 	                </div>
 	            </div>
 	            <div class="hourly-forecast clearfix">
-	                <div class="forecast-date">17:00</div>
+	                <div class="forecast-date">09:00</div>
 	                <div class="forecast-weather">
 	                    <div class="forecast-temperature">25 &deg;</div>
 	                    <div class="forecast-icon">
@@ -83,7 +120,7 @@
 	                </div>
 	            </div>
 	            <div class="hourly-forecast clearfix">
-	                <div class="forecast-date">18:00</div>
+	                <div class="forecast-date">12:00</div>
 	                <div class="forecast-weather">
 	                    <div class="forecast-temperature">24 &deg;</div>
 	                    <div class="forecast-icon">
@@ -94,7 +131,7 @@
 	                </div>
 	            </div>
 	            <div class="hourly-forecast clearfix">
-	                <div class="forecast-date">19:00</div>
+	                <div class="forecast-date">15:00</div>
 	                <div class="forecast-weather">
 	                    <div class="forecast-temperature">23 &deg;</div>
 	                    <div class="forecast-icon">
@@ -104,6 +141,28 @@
 	                    </div>
 	                </div>
 	            </div>
+                <div class="hourly-forecast clearfix">
+                    <div class="forecast-date">18:00</div>
+                    <div class="forecast-weather">
+                        <div class="forecast-temperature">23 &deg;</div>
+                        <div class="forecast-icon">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 34.85 34.85" style="enable-background:new 0 0 34.85 34.85;" xml:space="preserve" fill="#fff">
+                                <use xlink:href="img/icons/002-sun.svg#sun"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="hourly-forecast clearfix">
+                    <div class="forecast-date">21:00</div>
+                    <div class="forecast-weather">
+                        <div class="forecast-temperature">23 &deg;</div>
+                        <div class="forecast-icon">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 34.85 34.85" style="enable-background:new 0 0 34.85 34.85;" xml:space="preserve" fill="#fff">
+                                <use xlink:href="img/icons/002-sun.svg#sun"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 	        </div>
 	    </div>
 	</main>
