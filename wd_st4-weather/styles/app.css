@@ -45,6 +45,7 @@ nav a {
     text-decoration: none;
     text-transform: uppercase;
     float: left;
+    cursor: pointer;
 }
 
 nav a.active {
@@ -86,7 +87,13 @@ nav a.active {
     padding: 0 15%;
 }
 
+.weather-icon img {
+    width: 100%;
+}
+
 .now {
+    width: 550px;
+    height: 200px;
     text-align: center;
     background-color: #3469af;
 }
@@ -95,6 +102,7 @@ nav a.active {
     font-size: 200%;
     margin-top: 10%;
     padding: 0 5%;
+    white-space: nowrap;
 }
 
 .current-temperature {
@@ -129,7 +137,12 @@ nav a.active {
 }
 
 .forecast-icon {
-    max-width: 40px;
+    width: 40px;
+}
+
+.forecast-icon img {
+    width: 100%;
+    vertical-align: bottom;
 }
 
 .forecast-icon svg {

@@ -12,14 +12,13 @@
         "humidity": 75,
         "temp_kf": 5.11
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -44,14 +43,13 @@
         "humidity": 70,
         "temp_kf": 3.84
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -76,14 +74,13 @@
         "humidity": 90,
         "temp_kf": 2.56
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -108,14 +105,13 @@
         "humidity": 80,
         "temp_kf": 1.28
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -140,14 +136,13 @@
         "humidity": 85,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 803,
           "main": "Clouds",
           "description": "broken clouds",
           "icon": "04n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 76
       },
@@ -172,14 +167,13 @@
         "humidity": 89,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 76
       },
@@ -207,14 +201,13 @@
         "humidity": 97,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 501,
           "main": "Rain",
           "description": "moderate rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 92
       },
@@ -242,14 +235,13 @@
         "humidity": 100,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 64
       },
@@ -277,14 +269,13 @@
         "humidity": 95,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 92
       },
@@ -312,14 +303,13 @@
         "humidity": 99,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 92
       },
@@ -347,14 +337,13 @@
         "humidity": 95,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 88
       },
@@ -385,14 +374,13 @@
         "humidity": 96,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 88
       },
@@ -423,14 +411,13 @@
         "humidity": 99,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 92
       },
@@ -461,14 +448,13 @@
         "humidity": 97,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 88
       },
@@ -499,14 +485,13 @@
         "humidity": 98,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 88
       },
@@ -537,14 +522,13 @@
         "humidity": 99,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 500,
           "main": "Rain",
           "description": "light rain",
           "icon": "10d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 56
       },
@@ -575,14 +559,13 @@
         "humidity": 95,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "02d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 8
       },
@@ -609,14 +592,13 @@
         "humidity": 89,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "02d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 8
       },
@@ -643,14 +625,13 @@
         "humidity": 91,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -677,14 +658,13 @@
         "humidity": 93,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -711,14 +691,13 @@
         "humidity": 92,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -745,14 +724,13 @@
         "humidity": 84,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -779,14 +757,13 @@
         "humidity": 86,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -813,14 +790,13 @@
         "humidity": 84,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -847,14 +823,13 @@
         "humidity": 89,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -881,14 +856,13 @@
         "humidity": 87,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -915,14 +889,13 @@
         "humidity": 90,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -949,14 +922,13 @@
         "humidity": 83,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -983,14 +955,13 @@
         "humidity": 80,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -1017,14 +988,13 @@
         "humidity": 85,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -1051,14 +1021,13 @@
         "humidity": 84,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -1085,14 +1054,13 @@
         "humidity": 83,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -1119,14 +1087,13 @@
         "humidity": 83,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -1153,14 +1120,13 @@
         "humidity": 81,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 800,
           "main": "Clear",
           "description": "clear sky",
           "icon": "01d"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 0
       },
@@ -1187,14 +1153,13 @@
         "humidity": 88,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 801,
           "main": "Clouds",
           "description": "few clouds",
           "icon": "02n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 24
       },
@@ -1221,14 +1186,13 @@
         "humidity": 85,
         "temp_kf": 0
       },
-      "weather": [
-        {
+      "weather": {
           "id": 801,
           "main": "Clouds",
           "description": "few clouds",
           "icon": "02n"
-        }
-      ],
+      }
+      ,
       "clouds": {
         "all": 20
       },
