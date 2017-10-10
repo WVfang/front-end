@@ -27,6 +27,11 @@ $(document).ready(function() {
             return;
         }
 
+        if(buttonId == "btn-api") {
+            apiDatabase();
+            return;
+        }
+
     }
 
 })
