@@ -1,5 +1,29 @@
 // Function on double click on draggable div
 
+function textAreaCreating(id) {
+    var textArea = $("<textarea id=" + "input_" + id
+        + ' class="draggable-phrase-input"></textarea>');
+
+    textArea.bind("input propertychange", function() {
+        var textAreaMaxHeight = $("#drag-space").height() - SPACE_OF_MESSAGE_TAIL;
+        return resizeArea(textArea[0].id, textAreaMaxHeight);
+    });
+
+    return textArea;
+}
+
+function setDimensionalCharacters(textArea, characters) { // width, height, top, left
+
+    textAreaStyle = textArea.style;
+
+    var key;
+    for(key in characters) {
+        textAreaStyle[key] = characters[key] + 'px';
+    }
+
+    return textAreaStyle;
+}
+
 (function($) {
     $.fn.editable = function() {
 
@@ -7,13 +31,7 @@
         console.log(textBlock);
   
         // Textarea creating
-        var textArea = $("<textarea id=" + "input_" + textBlock[0].id 
-            + ' class="draggable-phrase-input"></textarea>');
-
-        textArea.bind("input propertychange", function() {
-            var textAreaMaxHeight = $("#drag-space").height() - 15;
-            return resizeArea(textArea[0].id, textAreaMaxHeight);
-        });
+        var textArea = textAreaCreating(textBlock[0].id);
 
         // Message tail creating
         var textAreaTail = $('<div class="draggable-phrase-tail"></div>');
@@ -34,7 +52,6 @@
         textBlock.dblclick(function() {
             toggleVisiblity($(this), true);
         });
-
 
         // Hiding the input and showing the original div
         textArea.keypress(function(event) {
@@ -73,11 +90,9 @@
                 textArea.show().focus(); 
                 textAreaTail.show();
 
-                textAreaStyle = textArea[0].style;
-                textAreaStyle.width = width + 'px'; 
-                textAreaStyle.height = height + 'px';
-                textAreaStyle.top = position["top"] + 'px';
-                textAreaStyle.left =  position["left"] + 'px';
+                
+                textArea[0].style = setDimensionalCharacters(textArea[0], {"width": width, "height": height, "top": position["top"], "left": position["left"]});
+                console.log(textArea[0].style);
 
                 textAreaTailStyle = textAreaTail[0].style;
                 textAreaTailStyle.top = (position["top"] + height - 2.5) + 'px';

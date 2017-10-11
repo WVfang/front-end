@@ -3,6 +3,7 @@
 <head>
 	<title></title>
 	<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/constants.js"></script>
 	<script type="text/javascript" src="assets/js/data_save.js"></script>
 	<script type="text/javascript" src="assets/js/drag_and_drop.js"></script>
 	<script type="text/javascript" src="assets/js/edit_on_dblclick.js"></script>

@@ -1,0 +1,2 @@
+const RADIX_10 = 10;
+const SPACE_OF_MESSAGE_TAIL = 15;

@@ -9,20 +9,19 @@
 		$data = json_decode($data, true);
 	}
 
-	// Delete draggable div if $_POST includes "removing"
+	
 	if(@$updatedData["removing"]) {
+		// Delete draggable div if $_POST includes "removing"
 		unset($data["mes" . $updatedData["id"]]);
 	} 
-
-	// Replace some info of draggable divs
 	else if(@$data["mes" . $updatedData["id"]]) {
+		// Replace some info of draggable divs 
 		foreach ($updatedData as $key => $value) {
 			$data["mes" . $updatedData["id"]][$key] = $value;
 		}
 	} 
-
-	// Create new info-object (when user pushs btn "Add new")
-	else {
+	else { 
+		// Create new info-object (when user pushs btn "Add new")
 		$data["mes" . $updatedData["id"]] = $updatedData;
 	}
 
