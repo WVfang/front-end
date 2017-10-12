@@ -1,7 +1,20 @@
 <?php
 	
 	$dataStore = "../jsons/data.json";
-	$updatedData = $_POST;
+	
+	$updatedData["id"] = intval($_POST["id"]);
+	if(isset($_POST["content"])) {
+		$updatedData["content"] = strip_tags($_POST["content"]);
+		$updatedData["content"] = htmlspecialchars($updatedData["content"]);
+	}
+	if(isset($_POST["leftOffset"])) {
+		$updatedData["leftOffset"] = intval($_POST["leftOffset"]);
+	}
+	if(isset($_POST["topOffset"])) {
+		$updatedData["topOffset"] = intval($_POST["topOffset"]);
+	}
+
+	print_r($updatedData);
 
 	// Get data from json file
 	if(file_get_contents($dataStore)) {

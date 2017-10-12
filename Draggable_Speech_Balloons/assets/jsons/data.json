@@ -1,1 +1,14 @@
-[]
+{
+    "message0": {
+        "id": 0,
+        "content": "",
+        "leftOffset": 270,
+        "topOffset": 183
+    },
+    "message1": {
+        "id": 1,
+        "content": "",
+        "leftOffset": 270,
+        "topOffset": 158
+    }
+}

@@ -25,7 +25,9 @@ function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 		messageData.removing = true;
 	}
 
-	$.post("assets/php/data_save.php", messageData)
+	$.post("assets/php/data_save.php", messageData, function(data) {
+		console.log(data);
+	})
 		.done(function() {
 		    console.log("Data save success");
 		})
@@ -37,20 +39,21 @@ function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 		});
 }
 
-function checkForDataType(data, dataType) {
 
-	if(!(typeof dataType == "string")) {
-		console.log("Incorrect data");
-		console.log("dataType: " + dataType + " type: " + typeof dataType);
-		return;
+	function checkForDataType(data, dataType) {
+
+		if(!(typeof dataType == "string")) {
+			console.log("Incorrect data");
+			console.log("dataType: " + dataType + " type: " + typeof dataType);
+			return;
+		}
+
+		if(!(typeof data == dataType)) {
+			console.log("Incorrect data");
+			console.log(checkForDataType.caller);
+			console.log("data: " + data + " type: " + typeof data + "(required: " + dataType + ")");
+			return false;
+		}
+
+		return true;
 	}
-
-	if(!(typeof data == dataType)) {
-		console.log("Incorrect data");
-		console.log(checkForDataType.caller);
-		console.log("data: " + data + " type: " + typeof data + "(required: " + dataType + ")");
-		return false;
-	}
-
-	return true;
-}

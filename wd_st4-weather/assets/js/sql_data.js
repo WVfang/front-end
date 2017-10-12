@@ -7,34 +7,48 @@ function sglDatabase() {
 			return;
 		}
 
-		// array of objects which contains today's forecasts
+		// Array of objects which contains today's forecasts
 		var data = JSON.parse(json); 
 
 		var infoToday = {};
 		infoToday.today = new Date(data["today"]);
-		infoToday.forecast = [];
-
-		for(var i = 0; data["forecast"][i]; i++) {
-			var infoUnit = {};
-			infoUnit.time = new Date(data["forecast"][i]["timestamp"]).format("HH:MM");
-			infoUnit.temp = data["forecast"][i]["temperature"];
-			infoUnit.icon = chooseIcon(data["forecast"][i]["clouds"], data["forecast"][i]["rain_possibility"]);
-
-			infoToday.forecast.push(infoUnit);
-		}
+		infoToday.forecast = getTodayForecast(data["forecast"]);
 
 		// Call function to display received data
 	    displayForecastData(infoToday);
 
 	});
 
+	function getTodayForecast(data) {
+
+		if(!(typeof data == "object")) {
+			console.log("Incorrect data");
+			console.log("data: " + data + "\ntype: " + typeof data);
+			return;
+		}
+
+		var todayForecast = [];
+
+		for(var i = 0; data[i]; i++) {
+			var infoUnit = {};
+			infoUnit.time = new Date(data[i]["timestamp"]).format("HH:MM");
+			infoUnit.temp = data[i]["temperature"];
+			infoUnit.icon = chooseIcon(data[i]["clouds"], data[i]["rain_possibility"]);
+
+			todayForecast.push(infoUnit);
+		}
+
+		return todayForecast;
+	}
+
 
 	function chooseIcon(clouds, rainPossibility) {
 
-		if(!(checkForNumber(clouds) && checkForNumber(rainPossibility))) {
+		if(!((typeof clouds == "number" || typeof clouds == "string") &&
+			 (typeof rainPossibility == "number" || typeof rainPossibility == "string"))) {
 			console.log("Incorrect data");
-			console.log(clouds + ": " + typeof clouds);
-			console.log(rainPossibility + ": " + typeof rainPossibility);
+			console.log("clouds: " + clouds + ": " + typeof clouds);
+			console.log("rainPos: " + rainPossibility + ": " + typeof rainPossibility);
 			return;
 		}
 
@@ -49,24 +63,16 @@ function sglDatabase() {
 		}
 
 
-
+		// Rain posibility more than 50%
 		if(rainPossibility > 0.5) {
 			return "Rain";
 		}
 
+		// Cloud more than 20%
 		if(clouds > 20) {
 			return "Clouds";
 		}
 
 		return "Clear";
-	}
-
-	function checkForNumber(number) {
-
-		if(typeof number == "number" || typeof number == "string") {
-			return true;
-		}
-
-		return false;
 	}
 }

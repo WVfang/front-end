@@ -122,16 +122,9 @@ function resizeArea(elem_id, maxHeight) {
     checkForCorrectOffset(area, "top", areaPosition["top"], areaHeight, dragSpaceHeight);
     checkForCorrectOffset(area, "left", areaPosition["left"], areaWidth, dragSpaceWidth);
 
-    area.css({
-        "width": areaWidth + 'px',
-        "height": areaHeight + 'px'
-    });
-
-    area_tail.css({
-        "top": (areaPosition["top"] + areaHeight) + 'px',
-        "left": (areaPosition["left"] + areaWidth - MESSAGE_TAIL_DISPLACEMENT) + 'px'
-    })
-
+    area = setDimensionalCharacters(area, {"width": areaWidth, "height": areaHeight});
+    area_tail = setDimensionalCharacters(area_tail, {"top": areaPosition["top"] + areaHeight,
+                                                     "left": areaPosition["left"] + areaWidth - MESSAGE_TAIL_DISPLACEMENT});
     return true;
 }
 
@@ -196,6 +189,11 @@ function setDimensionalCharacters(textArea, characters) { // width, height, top,
 
     var key;
     for(key in characters) {
+
+        if(!checkForDataType(characters[key], "number")) {
+            return;
+        }
+
         textArea.css({
             [key]: characters[key] + 'px'
         });

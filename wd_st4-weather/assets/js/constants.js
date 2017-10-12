@@ -1,0 +1,1 @@
+const KELVIN_IN_CELSIUS = -273;

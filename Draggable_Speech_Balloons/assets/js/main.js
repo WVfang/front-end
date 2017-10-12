@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	var btnAddDiv = $("#btn-add-div");
+	var addDiv = $("#btn-add-div");
 	var messageId = 0; 
 
 	// Add dragover&drop listeners to draggable space
@@ -24,12 +24,12 @@ $(document).ready(function() {
 	});		
 
 	// Function on btn click to add draggable div
-	btnAddDiv.bind("click", function() {
+	addDiv.bind("click", function() {
 		$("#drag-space").append("<div id=\"" + messageId + "\" class=\"draggable-phrase\" draggable=\"true\">Hello world!</div>");
 		$("#drag-space .draggable-phrase:last").on("dragstart", drag_start).editable();
 
 		// Updating data of position of draggable elements (starting location in the upper-left corner)
-		updatingJsonData(messageId, $("#drag-space .draggable-phrase:last").html(), 0, 0);
+		updatingJsonData(messageId, $("#drag-space .draggable-phrase:last").html(), undefined, undefined);
 		messageId++;
 	});
 
@@ -59,8 +59,8 @@ $(document).ready(function() {
 	    }
 
 	    if(!dataLength > 0) {
-			console.log("Data storage is empty");
-			return false;
+			console.log("Incorrect dataLength: " + dataLength);
+			return;
 		}
 
 		return dataLength;
@@ -83,5 +83,7 @@ $(document).ready(function() {
 				.editable();
 		}
 	}
+
+	
 	
 });
