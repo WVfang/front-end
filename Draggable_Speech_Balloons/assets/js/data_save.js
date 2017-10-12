@@ -1,14 +1,16 @@
 // Update jsonData when user edits or moves draggable divs 
 function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 
-	if(!(typeof parseInt(id) == "number" && parseInt(id) > 0 &&
-	   (typeof content == "string" || typeof content == "undefined") &&
-	   (typeof leftOffset == "number" || typeof leftOffset == "undefined") && leftOffset > 0 &&
-	   (typeof topOffset == "number" || typeof topOffset == "undefined") && topOffset > 0)
+	if(!((typeof parseInt(id) == "number" && parseInt(id) >= 0) &&
+	    (typeof content == "string" || typeof content == "undefined") &&
+	   ((typeof leftOffset == "number" && leftOffset >= 0) || typeof leftOffset == "undefined") &&
+	   ((typeof topOffset == "number" && topOffset >= 0) || typeof topOffset == "undefined"))
 	) {
 		console.log("Incorrect data");
-		console.log("id: " + id + " type: " + typeof id + "\ncontent: " + content + " type: " + typeof content 
-			+ "\nleftoffset: " + leftOffset + " type: " + typeof leftOffset + "\ntopOffset: " + topOffset  + " type: " + typeof topOffset);
+		console.log("id: " + id + " type: " + typeof id + 
+					"content: " + content + " type: " + typeof content + 
+					"leftOffset: " + leftOffset + " type: " + typeof leftOffset + 
+					"topOffset: " + topOffset + " type: " + typeof topOffset);
 		return;
 	}
 
@@ -33,4 +35,22 @@ function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 		.always(function() {
 			console.log("Data save finished");
 		});
+}
+
+function checkForDataType(data, dataType) {
+
+	if(!(typeof dataType == "string")) {
+		console.log("Incorrect data");
+		console.log("dataType: " + dataType + " type: " + typeof dataType);
+		return;
+	}
+
+	if(!(typeof data == dataType)) {
+		console.log("Incorrect data");
+		console.log(checkForDataType.caller);
+		console.log("data: " + data + " type: " + typeof data + "(required: " + dataType + ")");
+		return false;
+	}
+
+	return true;
 }

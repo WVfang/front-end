@@ -12,17 +12,17 @@
 	
 	if(@$updatedData["removing"]) {
 		// Delete draggable div if $_POST includes "removing"
-		unset($data["mes" . $updatedData["id"]]);
+		unset($data["message" . $updatedData["id"]]);
 	} 
-	else if(@$data["mes" . $updatedData["id"]]) {
+	else if(@$data["message" . $updatedData["id"]]) {
 		// Replace some info of draggable divs 
 		foreach ($updatedData as $key => $value) {
-			$data["mes" . $updatedData["id"]][$key] = $value;
+			$data["message" . $updatedData["id"]][$key] = $value;
 		}
 	} 
 	else { 
 		// Create new info-object (when user pushs btn "Add new")
-		$data["mes" . $updatedData["id"]] = $updatedData;
+		$data["message" . $updatedData["id"]] = $updatedData;
 	}
 
 	// Push updated data to json file

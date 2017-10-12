@@ -43,10 +43,9 @@ function drag_over(event) {
 // Check whether numbers are in interval
 function checkForOccurrenceInTheInterval(number, minAllowed, maxAllowed) {
 
-	if(!(typeof number == "number" && typeof minAllowed == "number" && typeof maxAllowed == "number")) {
-		console.log("Incorrect data");
-		console.log("number: " + number + "type: " + typeof number + "\nminAllowed: " + minAllowed + " type: " 
-			+ typeof minAllowed + "\nmaxAllowed: " + maxAllowed + " type: " + typeof maxAllowed);
+	if(!(checkForDataType(number, "number") &&
+	 	 checkForDataType(minAllowed, "number") &&
+		 checkForDataType(maxAllowed, "number"))) {
 		return;
 	}
 

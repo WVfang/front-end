@@ -1,36 +1,9 @@
 // Function on double click on draggable div
 
-function textAreaCreating(id) {
-    var textArea = $("<textarea id=" + "input_" + id
-        + ' class="draggable-phrase-input"></textarea>');
-
-    textArea.bind("input propertychange", function() {
-        var textAreaMaxHeight = $("#drag-space").height() - SPACE_OF_MESSAGE_TAIL;
-        return resizeArea(textArea[0].id, textAreaMaxHeight);
-    });
-
-    return textArea;
-}
-
-function setDimensionalCharacters(textArea, characters) { // width, height, top, left
-
-    textAreaStyle = textArea.style;
-
-    var key;
-    for(key in characters) {
-        textAreaStyle[key] = characters[key] + 'px';
-    }
-
-    return textAreaStyle;
-}
-
 (function($) {
     $.fn.editable = function() {
 
         var textBlock = $(this);
-        console.log(textBlock);
-  
-        // Textarea creating
         var textArea = textAreaCreating(textBlock[0].id);
 
         // Message tail creating
@@ -40,7 +13,7 @@ function setDimensionalCharacters(textArea, characters) { // width, height, top,
         var textAreaHidden = $("<div id=" + "input_" + textBlock[0].id 
             + "_hidden" + ' class="draggable-phrase-input"></div>')
             .css({
-                "visibility": "hidden",
+                "visibility": "",
                 "position": "absolute"
         });       
 
@@ -81,8 +54,8 @@ function setDimensionalCharacters(textArea, characters) { // width, height, top,
                 textBlock = element; // here the element is the div
 
                 var position = textBlock.position();
-                var width = textBlock.width();
-                var height = textBlock.height();
+                var width = textBlock.outerWidth();
+                var height = textBlock.outerHeight();
 
                 textArea = element.next(); // here element is the div so the textarea is next
                 textAreaTail = textArea.next();
@@ -90,19 +63,14 @@ function setDimensionalCharacters(textArea, characters) { // width, height, top,
                 textArea.show().focus(); 
                 textAreaTail.show();
 
-                
-                textArea[0].style = setDimensionalCharacters(textArea[0], {"width": width, "height": height, "top": position["top"], "left": position["left"]});
-                console.log(textArea[0].style);
-
-                textAreaTailStyle = textAreaTail[0].style;
-                textAreaTailStyle.top = (position["top"] + height - 2.5) + 'px';
-                textAreaTailStyle.left = (position["left"] + width - 25) + 'px'; 
-
+                textArea = setDimensionalCharacters(textArea, {"width": width, "height": height, "top": position["top"], "left": position["left"]});
+                textAreaTail = setDimensionalCharacters(textAreaTail, {"top": position["top"] + height - 2.5, "left": position["left"] + width - 25});
+    
                 // Move the cursor at the end in input box.
                 moveCaretToEnd(textArea);
             } else {
                 textBlock = element.prev(); // here element is the input so the div is previous
-                textArea = element; // here element is the textazrea
+                textArea = element; // here element is the textarea
                 textAreaTail = element.next();
                 textBlock.show();
                 textArea.hide();
@@ -116,7 +84,7 @@ function setDimensionalCharacters(textArea, characters) { // width, height, top,
                     textBlock.next().remove(); // remove hidden div
                     textBlock.remove(); // remove textblock
                 } else {
-                  textBlock.html(textArea.val());
+                    textBlock.html(textArea.val());
                 }
 
                 // Updating data of content of draggable element
@@ -128,62 +96,112 @@ function setDimensionalCharacters(textArea, characters) { // width, height, top,
 
 function resizeArea(elem_id, maxHeight) {
 
-    var area = $("#" + elem_id);
-    var area_tail = area.next();
-    var area_hidden = $("#" + elem_id + "_hidden");
-    var text = '';
-
-    // Forbid input if new symbol increase message beyond maxHeight
-    if(area[0].scrollHeight > maxHeight) {
-        area.val(area.val().substring(0, area.val().length - 1));
-        console.log("The limit of symbols is reached");
+    if(!(checkForDataType(elem_id, "string") && checkForDataType(maxHeight, "number"))) {
         return false;
     }
 
+    var area = $("#" + elem_id);
+    var area_tail = area.next();
+    var area_hidden = $("#" + elem_id + "_hidden");
+
+    // Forbid input if new symbol increase height of message beyond maxHeight
+    area.val(checkForSymbolsLimit(area.val(), area[0].scrollHeight, maxHeight));
+
     // Split text into lines and insert it into hidden text area to count new message height
-    var lines = area.val().replace(/[<>]/g, '_').split("\n");
-    $.each(lines, function(key, value) {
-        text = text + '<div>' + value.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
+    area_hidden.text(splitTextIntoLines(area.val()));
+
+    var dragSpaceWidth = $("#drag-space").outerWidth();
+    var dragSpaceHeight = $("#drag-space").outerHeight() - SPACE_OF_MESSAGE_TAIL;
+
+    var areaPosition = area.position();
+    var areaHeight = Math.min(area_hidden.outerHeight() + TEXTAREA_EMPTY_BOTTOM_SPACE, maxHeight);
+    var areaWidth = area_hidden.outerWidth(); // limited by css (100-300px)
+
+    // Displacement of the message, which does not allow it to go beyond 
+    // the boundaries while increasing
+    checkForCorrectOffset(area, "top", areaPosition["top"], areaHeight, dragSpaceHeight);
+    checkForCorrectOffset(area, "left", areaPosition["left"], areaWidth, dragSpaceWidth);
+
+    area.css({
+        "width": areaWidth + 'px',
+        "height": areaHeight + 'px'
     });
-    area_hidden.text(lines);
 
-    var dragSpace = $("#drag-space");
-    var dragSpaceWidth = dragSpace.width();
-    var dragSpaceHeight = dragSpace.height() - 15;
-
-    var position = area.position();
-    var height = area_hidden.height() + 15;
-        height = Math.min(maxHeight, height); // height can differ (it depends on dragSpace height)
-    var width = area_hidden.width(); // limited by css (100-300px)
-
-    // If message block is at the bottom border of drag space
-    if(position["top"] + height > dragSpaceHeight) {
-        var topOffset = dragSpaceHeight - height;
-
-        area.css("top", topOffset);
-        area.prev().css("top", topOffset);
-
-        updatingJsonData(area.prev()[0].id, undefined,  undefined, topOffset);
-    }
-
-    // If message block at the right border of drag space
-    if(position["left"] + width > dragSpaceWidth) {
-        var leftOffset = dragSpaceWidth - width;
-
-        area.css("left", leftOffset);
-        area.prev().css("left", leftOffset);
-
-        updatingJsonData(area.prev()[0].id, undefined,  leftOffset, undefined);
-    }
-
-    area[0].style.width = width + 'px';
-    area[0].style.height = height + 'px';
-
-    // Update textarea "message-tail" position
-    area_tail[0].style.top = (area.position()["top"] + height) + 'px';
-    area_tail[0].style.left = (area.position()["left"] + width - 25) + 'px';
+    area_tail.css({
+        "top": (areaPosition["top"] + areaHeight) + 'px',
+        "left": (areaPosition["left"] + areaWidth - MESSAGE_TAIL_DISPLACEMENT) + 'px'
+    })
 
     return true;
+}
+
+function textAreaCreating(id) {
+    var textArea = $("<textarea id=" + "input_" + id
+        + ' class="draggable-phrase-input"></textarea>');
+
+    textArea.bind("input propertychange", function() {
+        var textAreaMaxHeight = $("#drag-space").height() - SPACE_OF_MESSAGE_TAIL;
+        return resizeArea(textArea.attr("id"), textAreaMaxHeight);
+    });
+
+    return textArea;
+}
+
+function checkForSymbolsLimit(content, messageHeight, maxHeight) {
+
+    if(messageHeight > maxHeight) {
+        content = content.substring(0, content.length - 1);
+        console.log("The limit of symbols is reached");
+    }
+
+    return content;
+}
+
+function checkForCorrectOffset(textarea, typeOfOffset, offset, sideSize, maxSpaceSize) {
+    if(offset + sideSize > maxSpaceSize) {
+        var correctedOffset = maxSpaceSize - sideSize;
+
+        textarea.css(typeOfOffset, correctedOffset);
+        textarea.prev().css(typeOfOffset, correctedOffset);
+
+        if(typeOfOffset == "left") {
+            updatingJsonData(textarea.prev()[0].id, undefined,  correctedOffset, undefined);
+            return;
+        }
+
+        if(typeOfOffset == "top") {
+            updatingJsonData(textarea.prev()[0].id, undefined,  undefined, correctedOffset);
+            return;
+        }
+    }
+}
+
+function splitTextIntoLines(text) {
+
+    /*var content = '';*/
+    var lines = text.replace(/[<>]/g, '_').split("\n");
+
+    /*$.each(lines, function(key, value) {
+        content = content + '<div>' + value.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
+    });*/
+
+    return lines;
+}
+
+function setDimensionalCharacters(textArea, characters) { // width, height, top, left
+
+    if(!(checkForDataType(textArea, "object") || checkForDataType(characters, "object"))) {
+        return;
+    }
+
+    var key;
+    for(key in characters) {
+        textArea.css({
+            [key]: characters[key] + 'px'
+        });
+    }
+
+    return textArea;
 }
 
 function moveCaretToEnd(inputObject) {
