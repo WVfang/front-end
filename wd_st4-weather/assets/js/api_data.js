@@ -1,43 +1,74 @@
 function apiDatabase() {
 
-	$.getJSON("http://api.openweathermap.org/data/2.5/forecast?q=Kirovograd&APPID=e5899f03d2ec08fa1c95a34d30fd44e8", function(data) {
-		
-		var today = new Date();
-        var infoToday = {};
-        infoToday.today = today;
+    $.getJSON("http://dataservice.accuweather.com/locations/v1/search?q=Kirovohrad&apikey=4svGTMpz9d7A0i7oc34oMEHhYEF6Fedj", function(data) {
 
-        // Choose data(info) for today
-        infoToday.forecast = selectTodaysInfo(data["list"], today);
+        var locationKey = data[0]["Key"];
 
-        // Call function to display received data
-        displayForecastData(infoToday);
-	});
+        $.getJSON("http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/" + locationKey + ".json?apikey=4svGTMpz9d7A0i7oc34oMEHhYEF6Fedj", function(data) {
 
-    function selectTodaysInfo(dataTotal, todayDate) {
+            var today = new Date();
+            var todaysInfo = {};
 
-        if(!(typeof dataTotal == "object" && typeof todayDate == "object")) {
+            todaysInfo.today = Date.parse(today);
+            todaysInfo.forecast = selectTodaysInfo(data);
+
+            // Call function to display received data
+            displayForecastData(todaysInfo);
+
+        });
+    })
+
+    function selectTodaysInfo(data) {
+
+        if(!(typeof data == "object")) {
             console.log("Incorrect data");
-            console.log("data: " + dataTotal + "\ntype: " + typeof dataTotal +
-                        "today: " + todayDate + "\ntype: " + typeof todayDate);
+            console.log("data: " + data + "\ntype: " + typeof data);
+            return;
         }
 
-        var infoToday = [];
-        for(var i = 0; dataTotal[i]; i++) {
+        var todaysInfo = [];
 
-            var infoBlock = dataTotal[i];
-            var infoBlockDate = new Date(infoBlock["dt_txt"]);
+        for(var i = 0; data[i]; i++) {
 
-            if(infoBlockDate.format("yyyy/mm/dd") == todayDate.format("yyyy/mm/dd")) {
-                var forecastUnit = {};
-                forecastUnit.time = new Date(infoBlock["dt_txt"]).format("HH:MM");
-                forecastUnit.temp = Math.round((infoBlock["main"]["temp"] + KELVIN_IN_CELSIUS));
-                forecastUnit.icon = infoBlock["weather"][0]["main"];
-                
-                infoToday.push(forecastUnit);
-            }
+            var infoBlock = data[i];
+            var forecastUnit = {};
+
+            var timeInSeconds = timeAlignedOverTimeZone(new Date(data[i]["DateTime"]));
+
+            forecastUnit.time = timeInSeconds*1000;
+            forecastUnit.temp = fahrenheitIntoCentigrade(data[i]["Temperature"]["Value"]);
+            forecastUnit.icon = data[i]["IconPhrase"];
+
+            todaysInfo.push(forecastUnit);
+
         }
 
-        return infoToday;
+        return todaysInfo;
+    }
+
+    function fahrenheitIntoCentigrade(fahrenheit) {
+
+        if(!(typeof fahrenheit == "number" || typeof fahrenheit == "string")) {
+            console.log("Incorrect data");
+            console.log("Fahrenheit: " + fahrenheit + "\ntype: " + typeof fahrenheit);
+            return;
+        }
+
+        var centigrade = Math.round((5*(fahrenheit-32))/9);
+        return centigrade;
+    }
+
+    function timeAlignedOverTimeZone(time) {
+
+        if(!(typeof time == "object")) {
+            console.log("Incorrect data");
+            console.log("Time: " + time + "\ntype: " + typeof time);
+            return;
+        }
+
+        var timeInSeconds = Date.parse(time)/1000; // convert milliseconds into seconds
+        timeInSeconds = timeInSeconds + (time.getTimezoneOffset()*60); // convert minutes into seconds
+
+        return timeInSeconds;
     }
 }
-

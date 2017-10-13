@@ -53,10 +53,10 @@ function displayForecastData(infoToday) {
 
     // today is essentially a "new Date($.now())", but since there is no 
     // current day in SQL and JSON databases, the execution of the code loses its meaning
-    var today = infoToday["today"];
+    var today = infoToday["today"]; // today is date in seconds
 
-    // Set current date
-    $(".date").html(today.format("dddd dd/mm"));
+    // Set current date 
+    $(".date").html(new Date(today).format("dddd dd/mm"));
 
     // Display info(time/temperature/icon)
     displayData(infoToday["forecast"], today);
@@ -66,8 +66,8 @@ function displayData(data, todayDate) {
     for(var i = 0; data[i]; i++) {
 
         var hourlyForecast = $("<div class=\"hourly-forecast clearfix\"><div class=\"forecast-date\"></div><div class=\"forecast-weather\"><div class=\"forecast-temperature\"></div><div class=\"forecast-icon\"><img src=\"\"/></div></div></div>")
-
-        var time = data[i]["time"];
+        
+        var time = (new Date(data[i]["time"])).format("HH:MM");
         var temperature = data[i]["temp"] + " &deg;";
         var icon = getIconLink(data[i]["icon"]);
 
@@ -78,7 +78,8 @@ function displayData(data, todayDate) {
         $(".forecast").append(hourlyForecast);
 
         // Set current temperature/icon
-        if(time <= todayDate.format("HH:MM")) {
+        var forecastDate = Date.parse(new Date(data[i]["time"]));
+        if(forecastDate <= todayDate) {
             $(".current-temperature").html(temperature);
             $(".weather-icon").find("img").attr("src", icon);
         }
@@ -86,6 +87,19 @@ function displayData(data, todayDate) {
 }
 
 function getIconLink(iconName) {
+
+    if(!(typeof iconName == "string")) {
+        console.log("Incorrect data");
+        console.log("iconName: " + iconName + "\ntype: " + typeof iconName);
+        return;
+    }
+
+    if(iconName == "Cloudy") iconName = "Clouds";
+    if(iconName == "Mostly cloudy") iconName = "Clouds";
+    if(iconName == "Intermittent clouds") iconName = "Partly clouds";
+    if(iconName == "Partly cloudy") iconName = "Partly clouds";
+    if(iconName == "Showers") iconName = "Rain";
+
 	var iconsBase = {
 		"Flash":        "assets/img/icons/001-flash.svg#flash",
 		"Clear":        "assets/img/icons/002-sun.svg#sun",
@@ -94,14 +108,8 @@ function getIconLink(iconName) {
 		"Clouds":       "assets/img/icons/005-cloud.svg#cloud"
 	}
 
-    if(!(typeof iconName == "string")) {
-        console.log("Incorrect data");
-        console.log("iconName: " + iconName + "\ntype: " + typeof iconName);
-        return;
-    }
-
 	if(iconsBase[iconName]) {
-		return iconsBase[iconName]
+		return iconsBase[iconName];
 	}
 
     console.log("Icon " + iconName + " hasn't been found");
