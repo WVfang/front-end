@@ -9,7 +9,7 @@ function jsonDatabase() {
         todayForecast.today = today;
 
         // Choose data(info) for today
-        todayForecast.forecast = chooseTodayForecast(data, today);
+        todayForecast.forecast = chooseTodayForecast(data["list"], today);
         
         // Call function to display received data
         displayForecastData(todayForecast);
@@ -26,16 +26,17 @@ function jsonDatabase() {
 
         var todayForecast = [];
 
-        for(var i = 0; totalForecast["list"][i]; i++) {
+        for(var i = 0; totalForecast[i]; i++) {
 
-            var info = totalForecast["list"][i];
-            var infoDate = new Date(info["dt_txt"]);
+            var infoBlock = totalForecast[i];
+            var infoBlockDate = new Date(infoBlock["dt_txt"]);
 
-            if(infoDate.format("yyyy/mm/dd") == todayDate.format("yyyy/mm/dd")) {
+            // Select only data where date equals to today's date
+            if(infoBlockDate.format("yyyy/mm/dd") == todayDate.format("yyyy/mm/dd")) {
                 var forecastUnit = {};
-                forecastUnit.time = new Date(info["dt_txt"]).format("HH:MM");
-                forecastUnit.temp = Math.round((info["main"]["temp"] + KELVIN_IN_CELSIUS));
-                forecastUnit.icon = info["weather"]["main"];
+                forecastUnit.time = new Date(infoBlock["dt_txt"]).format("HH:MM");
+                forecastUnit.temp = Math.round((infoBlock["main"]["temp"] + KELVIN_IN_CELSIUS));
+                forecastUnit.icon = infoBlock["weather"]["main"];
                 
                 todayForecast.push(forecastUnit);
             }

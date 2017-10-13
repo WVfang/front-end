@@ -30,12 +30,12 @@ function sglDatabase() {
 		var todayForecast = [];
 
 		for(var i = 0; data[i]; i++) {
-			var infoUnit = {};
-			infoUnit.time = new Date(data[i]["timestamp"]).format("HH:MM");
-			infoUnit.temp = data[i]["temperature"];
-			infoUnit.icon = chooseIcon(data[i]["clouds"], data[i]["rain_possibility"]);
+			var forecastUnit = {};
+			forecastUnit.time = new Date(data[i]["timestamp"]).format("HH:MM");
+			forecastUnit.temp = data[i]["temperature"];
+			forecastUnit.icon = chooseIcon(data[i]["clouds"], data[i]["rain_possibility"]);
 
-			todayForecast.push(infoUnit);
+			todayForecast.push(forecastUnit);
 		}
 
 		return todayForecast;

@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     jsonDatabase();
 
+    // Load data when one of the buttons(JSON, DATABASE or API) is clicked
     $("nav a").bind("click", function(event) {
 
         if($(this).attr("class") == "active") {
@@ -86,11 +87,11 @@ function displayData(data, todayDate) {
 
 function getIconLink(iconName) {
 	var iconsBase = {
-		"Flash":"img/icons/001-flash.svg#flash",
-		"Clear":"img/icons/002-sun.svg#sun",
-		"Rain":"img/icons/003-rain.svg#rain",
-		"Partly clouds":"img/icons/004-cloud-sun.svg#cloud-sun",
-		"Clouds":"img/icons/005-cloud.svg#cloud"
+		"Flash":        "assets/img/icons/001-flash.svg#flash",
+		"Clear":        "assets/img/icons/002-sun.svg#sun",
+		"Rain":         "assets/img/icons/003-rain.svg#rain",
+		"Partly clouds":"assets/img/icons/004-cloud-sun.svg#cloud-sun",
+		"Clouds":       "assets/img/icons/005-cloud.svg#cloud"
 	}
 
     if(!(typeof iconName == "string")) {

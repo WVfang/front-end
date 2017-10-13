@@ -13,7 +13,7 @@
         var textAreaHidden = $("<div id=" + "input_" + textBlock[0].id 
             + "_hidden" + ' class="draggable-phrase-input"></div>')
             .css({
-                "visibility": "",
+                "visibility": "hidden",
                 "position": "absolute"
         });       
 

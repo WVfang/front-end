@@ -1,14 +1,15 @@
 {
-    "message0": {
-        "id": 0,
-        "content": "",
-        "leftOffset": 270,
-        "topOffset": 183
+    "message2": {
+        "id": 2,
+        "content": "Hello world!",
+        "leftOffset": 427,
+        "topOffset": 260
     },
-    "message1": {
-        "id": 1,
-        "content": "",
-        "leftOffset": 270,
-        "topOffset": 158
+    "message3": {
+        "id": 3,
+        "removing": null,
+        "content": "Hello world!fdsfsd",
+        "leftOffset": 193,
+        "topOffset": 167
     }
 }

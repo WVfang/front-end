@@ -6,7 +6,7 @@
  		echo "[" . date("d/m/y H:i:s") . "] Не удалось подключиться к MySGL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
  	}
 
- 	$today = date("d.m.Y H:i", mktime(12, 0, 0, 4, 24, 2017));
+ 	$today = date("d.m.Y H:i", mktime(8, 0, 0, 4, 24, 2017));
  	$todayTime = date("Y-m-d", strtotime($today));
 
  	// Getting data

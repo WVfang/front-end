@@ -3,6 +3,7 @@
 	$dataStore = "../jsons/data.json";
 	
 	$updatedData["id"] = intval($_POST["id"]);
+	$updatedData["removing"] = $_POST["removing"];
 	if(isset($_POST["content"])) {
 		$updatedData["content"] = strip_tags($_POST["content"]);
 		$updatedData["content"] = htmlspecialchars($updatedData["content"]);

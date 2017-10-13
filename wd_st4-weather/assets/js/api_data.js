@@ -7,7 +7,7 @@ function apiDatabase() {
         infoToday.today = today;
 
         // Choose data(info) for today
-        infoToday.forecast = selectTodaysInfo(data, today);
+        infoToday.forecast = selectTodaysInfo(data["list"], today);
 
         // Call function to display received data
         displayForecastData(infoToday);
@@ -22,18 +22,18 @@ function apiDatabase() {
         }
 
         var infoToday = [];
-        for(var i = 0; dataTotal["list"][i]; i++) {
+        for(var i = 0; dataTotal[i]; i++) {
 
-            var info = dataTotal["list"][i];
-            var infoDate = new Date(info["dt_txt"]);
+            var infoBlock = dataTotal[i];
+            var infoBlockDate = new Date(infoBlock["dt_txt"]);
 
-            if(infoDate.format("yyyy/mm/dd") == todayDate.format("yyyy/mm/dd")) {
-                var infoUnit = {};
-                infoUnit.time = new Date(info["dt_txt"]).format("HH:MM");
-                infoUnit.temp = Math.round((info["main"]["temp"] + KELVIN_IN_CELSIUS));
-                infoUnit.icon = info["weather"][0]["main"];
+            if(infoBlockDate.format("yyyy/mm/dd") == todayDate.format("yyyy/mm/dd")) {
+                var forecastUnit = {};
+                forecastUnit.time = new Date(infoBlock["dt_txt"]).format("HH:MM");
+                forecastUnit.temp = Math.round((infoBlock["main"]["temp"] + KELVIN_IN_CELSIUS));
+                forecastUnit.icon = infoBlock["weather"][0]["main"];
                 
-                infoToday.push(infoUnit);
+                infoToday.push(forecastUnit);
             }
         }
 
