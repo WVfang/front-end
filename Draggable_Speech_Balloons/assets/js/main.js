@@ -9,6 +9,12 @@ $(document).ready(function() {
 	// Display messages 
 	$.getJSON("assets/jsons/data.json", {}, function(data) {
 
+		if(!(typeof data == "object")) {
+			console.log("Incorrect data");
+			console.log("data: " + data + "\ntype: " + typeof data);
+			return;
+		}
+
 		// Find the length of the object
 		var dataLength = getObjectLength(data);
 	    if(!dataLength) {
@@ -17,6 +23,7 @@ $(document).ready(function() {
 
 		// Get id of last message 
 		var dataKeys = Object.keys(data);
+		// Get the last key of object and use it to get its id
 		messageId = parseInt(data[dataKeys[dataKeys.length-1]]["id"]) + 1;
 
 		// Add divs into drag-space, set their position, add listener and make them editable
@@ -41,13 +48,15 @@ $(document).ready(function() {
 	}
 
 	function getObjectLength(object) {
-		
-		if(!object) {
+
+		if(object.length == 0) {
 			console.log("Empty database");
 			return;
 		} 
 
-		if(!checkForDataType(object, "object")) {
+		if(!(typeof object == "object")) {
+			console.log("Incorrect data");
+			console.log("data: " + object + "\ntype: " + typeof object);
 			return;
 		}
 
@@ -68,7 +77,9 @@ $(document).ready(function() {
 
 	function displayData(data, keys) {
 
-		if(!(checkForDataType(data, "object") && checkForDataType(keys, "object"))) {
+		if(!(typeof data == "object" && typeof keys == "object")) {
+			console.log("Incorrect data");
+			console.log("data: " + data + "\ntype: " + typeof data + "\nkeys: " + keys + "\ntype: " + typeof keys);
 			return;
 		}
 
@@ -84,6 +95,4 @@ $(document).ready(function() {
 		}
 	}
 
-	
-	
 });

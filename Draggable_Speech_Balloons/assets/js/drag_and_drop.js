@@ -1,6 +1,5 @@
 var selectedMesId;
 
-// Dragging functions
 function drag_start(event) {
 	selectedMesId = event.target.id;
 
@@ -23,8 +22,8 @@ function drop(event) {
 	var topOffset = checkForOccurrenceInTheInterval(topOffset, 0, maxAllowedHeight);
 	
 	dragElem.css({
-		"left": leftOffset + 'px',
-		"top": topOffset + 'px'
+		"left": leftOffset,
+		"top": topOffset
 	});
 
 	// Updating data of position of draggable elements
@@ -42,9 +41,11 @@ function drag_over(event) {
 // Check whether numbers are in interval
 function checkForOccurrenceInTheInterval(number, minAllowed, maxAllowed) {
 
-	if(!(checkForDataType(number, "number") &&
-	 	 checkForDataType(minAllowed, "number") &&
-		 checkForDataType(maxAllowed, "number"))) {
+	if(!(typeof number == "number" && typeof minAllowed == "number" && typeof maxAllowed == "number")) {
+		console.log("Incorrect data");
+		console.log("number: " + number + "\ntype: " + typeof number +
+					"minAllowed: " + minAllowed + "\ntype: " + typeof minAllowed +
+					"maxAllowed: " + maxAllowed + "\ntype: " + typeof maxAllowed);
 		return;
 	}
 

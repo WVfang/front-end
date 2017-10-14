@@ -38,22 +38,3 @@ function updatingJsonData(id, content, leftOffset, topOffset, removing) {
 			console.log("Data save finished");
 		});
 }
-
-
-	function checkForDataType(data, dataType) {
-
-		if(!(typeof dataType == "string")) {
-			console.log("Incorrect data");
-			console.log("dataType: " + dataType + " type: " + typeof dataType);
-			return;
-		}
-
-		if(!(typeof data == dataType)) {
-			console.log("Incorrect data");
-			console.log(checkForDataType.caller);
-			console.log("data: " + data + " type: " + typeof data + "(required: " + dataType + ")");
-			return false;
-		}
-
-		return true;
-	}

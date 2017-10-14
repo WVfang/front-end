@@ -63,6 +63,14 @@ function displayForecastData(infoToday) {
 }
 
 function displayData(data, todayDate) {
+
+    if(!(typeof data == "object" && typeof todayDate == "number")) {
+        console.log("Incorrect data");
+        console.log("data: " + data + "\ntype: " + typeof data +
+                    "todayDate: " + todayDate + "\ntype: " + typeof todayDate);
+        return;
+    }
+
     for(var i = 0; data[i]; i++) {
 
         var hourlyForecast = $("<div class=\"hourly-forecast clearfix\"><div class=\"forecast-date\"></div><div class=\"forecast-weather\"><div class=\"forecast-temperature\"></div><div class=\"forecast-icon\"><img src=\"\"/></div></div></div>")

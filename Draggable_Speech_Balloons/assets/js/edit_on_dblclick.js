@@ -1,10 +1,11 @@
 // Function on double click on draggable div
 
 (function($) {
+
     $.fn.editable = function() {
 
         var textBlock = $(this);
-        var textArea = textAreaCreating(textBlock[0].id);
+        var textArea = textAreaCreating(textBlock.attr("id"));
 
         // Message tail creating
         var textAreaTail = $('<div class="draggable-phrase-tail"></div>');
@@ -15,7 +16,7 @@
             .css({
                 "visibility": "hidden",
                 "position": "absolute"
-        });       
+            });       
 
         textArea.hide().insertAfter(textBlock).val(textBlock.html());
         textAreaTail.hide().insertAfter(textArea);
@@ -26,7 +27,7 @@
             toggleVisiblity($(this), true);
         });
 
-        // Hiding the input and showing the original div
+        // Hiding the input and showing the original div with entered text
         textArea.keypress(function(event) {
             if(event.keyCode == 13) {
                 $(this).blur();
@@ -34,6 +35,7 @@
             }
         });
 
+        // Hiding the input and showing the original div without text changes
         textArea.keyup(function(event) {
             if(event.keyCode == 27) {
                 $(this).val($(this).prev().html());
@@ -63,8 +65,17 @@
                 textArea.show().focus(); 
                 textAreaTail.show();
 
-                textArea = setDimensionalCharacters(textArea, {"width": width, "height": height, "top": position["top"], "left": position["left"]});
-                textAreaTail = setDimensionalCharacters(textAreaTail, {"top": position["top"] + height - 2.5, "left": position["left"] + width - 25});
+                textArea.css({
+                    "width": width,
+                    "height": height,
+                    "top": position["top"],
+                    "left": position["left"]
+                });
+
+                textAreaTail.css({
+                    "top": position["top"] + height - MESSAGE_TAIL_BOTTOM_OFFSET,
+                    "left": position["left"] + width - MESSAGE_TAIL_RIGHT_OFFSET
+                });
     
                 // Move the cursor at the end in input box.
                 moveCaretToEnd(textArea);
@@ -79,11 +90,10 @@
                 // Delete message block if it's empty
                 if(textArea.val() == "") {
                     var removing = true;
-                    textBlock.next().remove(); // remove textarea
-                    textBlock.next().remove(); // remove textarea tail
-                    textBlock.next().remove(); // remove hidden div
-                    textBlock.remove(); // remove textblock
+                    // Delete all elements until next draggable phrase
+                    textBlock.nextUntil(".draggable-phrase").remove().end().remove(); 
                 } else {
+                    // 
                     textBlock.html(textArea.val());
                 }
 
@@ -92,11 +102,15 @@
             }
         };
     };
+
 })(jQuery);
 
 function resizeArea(elem_id, maxHeight) {
 
-    if(!(checkForDataType(elem_id, "string") && checkForDataType(maxHeight, "number"))) {
+    if(!(typeof elem_id == "string" && typeof maxHeight == "number")) {
+        console.log("Incorrect data");
+        console.log("elem_id: " + elem_id + "\ntype: " + typeof elem_id +
+                    "\nmaxHeight: " + maxHeight + "\ntype: " + typeof maxHeight);
         return false;
     }
 
@@ -118,17 +132,31 @@ function resizeArea(elem_id, maxHeight) {
     var areaWidth = area_hidden.outerWidth(); // limited by css (100-300px)
 
     // Displacement of the message, which does not allow it to go beyond 
-    // the boundaries while increasing
+    // the borders while increasing
     checkForCorrectOffset(area, "top", areaPosition["top"], areaHeight, dragSpaceHeight);
     checkForCorrectOffset(area, "left", areaPosition["left"], areaWidth, dragSpaceWidth);
 
-    area = setDimensionalCharacters(area, {"width": areaWidth, "height": areaHeight});
-    area_tail = setDimensionalCharacters(area_tail, {"top": areaPosition["top"] + areaHeight,
-                                                     "left": areaPosition["left"] + areaWidth - MESSAGE_TAIL_DISPLACEMENT});
+    area.css({
+        "width": areaWidth,
+        "height": areaHeight
+    });
+
+    area_tail.css({
+        "top": areaPosition["top"] + areaHeight,
+        "left": areaPosition["left"] + areaWidth - MESSAGE_TAIL_DISPLACEMENT
+    });
+
     return true;
 }
 
 function textAreaCreating(id) {
+
+    if(!(typeof id == "string")) {
+        console.log("Incorrect data");
+        console.log("id: " + id + "\ntype: " + typeof id);
+        return;
+    }
+
     var textArea = $("<textarea id=" + "input_" + id
         + ' class="draggable-phrase-input"></textarea>');
 
@@ -142,6 +170,14 @@ function textAreaCreating(id) {
 
 function checkForSymbolsLimit(content, messageHeight, maxHeight) {
 
+    if(!(typeof content == "string" && typeof messageHeight == "number" && typeof maxHeight == "number")) {
+        console.log("Incorrect data");
+        console.log("content: " + content + "\ntype: " + typeof content +
+                    "\nmessageHeight: " + messageHeight + "\ntype: " + typeof messageHeight +
+                    "\nmexHeight: " + maxHeight + "\ntype: " + typeof maxHeight);
+        return;
+    }
+
     if(messageHeight > maxHeight) {
         content = content.substring(0, content.length - 1);
         console.log("The limit of symbols is reached");
@@ -150,26 +186,44 @@ function checkForSymbolsLimit(content, messageHeight, maxHeight) {
     return content;
 }
 
-function checkForCorrectOffset(textarea, typeOfOffset, offset, sideSize, maxSpaceSize) {
-    if(offset + sideSize > maxSpaceSize) {
-        var correctedOffset = maxSpaceSize - sideSize;
+function checkForCorrectOffset(textarea, typeOfOffset, areaOffset, areaSideSize, parentSize) {
 
-        textarea.css(typeOfOffset, correctedOffset);
-        textarea.prev().css(typeOfOffset, correctedOffset);
+    if(!(typeof textarea == "object" && typeof typeOfOffset == "string" && typeof areaOffset == "number"
+        && typeof areaSideSize == "number" && typeof parentSize == "number")) {
+        console.log("Incorrect data");
+        console.log("textarea: " + textarea + "\ntype: " + typeof textarea +
+                    "typeOfOffset: " + typeOfOffset + "\ntype: " + typeof typeOfOffset + 
+                    "areaOffset: " + areaOffset + "\ntype: " + typeof areaOffset +
+                    "areaSideSize: " + areaSideSize + "\ntype: " + typeof areaSideSize +
+                    "parentSize: " + parentSize + "\ntype: " + typeof parentSize);
+        return;
+    }
+
+    if(areaOffset + areaSideSize > parentSize) { 
+        var maxOffset = parentSize - areaSideSize;
+
+        textarea.css(typeOfOffset, maxOffset);
+        textarea.prev().css(typeOfOffset, maxOffset);
 
         if(typeOfOffset == "left") {
-            updatingJsonData(textarea.prev()[0].id, undefined,  correctedOffset, undefined);
+            updatingJsonData(textarea.prev()[0].id, undefined,  maxOffset, undefined);
             return;
         }
 
         if(typeOfOffset == "top") {
-            updatingJsonData(textarea.prev()[0].id, undefined,  undefined, correctedOffset);
+            updatingJsonData(textarea.prev()[0].id, undefined,  undefined, maxOffset);
             return;
         }
     }
 }
 
 function splitTextIntoLines(text) {
+
+    if(!(typeof text == "string")) {
+        console.log("Incorrect data");
+        console.log("text: " + text + "\ntype: " + typeof text);
+        return;
+    }
 
     /*var content = '';*/
     var lines = text.replace(/[<>]/g, '_').split("\n");
@@ -179,27 +233,6 @@ function splitTextIntoLines(text) {
     });*/
 
     return lines;
-}
-
-function setDimensionalCharacters(textArea, characters) { // width, height, top, left
-
-    if(!(checkForDataType(textArea, "object") || checkForDataType(characters, "object"))) {
-        return;
-    }
-
-    var key;
-    for(key in characters) {
-
-        if(!checkForDataType(characters[key], "number")) {
-            return;
-        }
-
-        textArea.css({
-            [key]: characters[key] + 'px'
-        });
-    }
-
-    return textArea;
 }
 
 function moveCaretToEnd(inputObject) {

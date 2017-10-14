@@ -2,7 +2,7 @@ function sglDatabase() {
 
 	$.post("assets/php/sql_database.php", function(json) {
 		
-		if(!json) {
+		if(json.length == 0) {
 			console.log("No information in database");
 			return;
 		}

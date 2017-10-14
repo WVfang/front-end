@@ -67,7 +67,7 @@ function apiDatabase() {
         }
 
         var timeInSeconds = Date.parse(time)/1000; // convert milliseconds into seconds
-        timeInSeconds = timeInSeconds + (time.getTimezoneOffset()*60); // convert minutes into seconds
+        timeInSeconds = timeInSeconds + (time.getTimezoneOffset()*60); // *60 - convert minutes into seconds
 
         return timeInSeconds;
     }

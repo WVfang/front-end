@@ -1,15 +1,23 @@
 {
+    "message0": {
+        "id": 0,
+        "removing": null,
+        "content": "Goodbye world!",
+        "leftOffset": 219,
+        "topOffset": 312
+    },
+    "message1": {
+        "id": 1,
+        "removing": null,
+        "content": "Hello world!",
+        "leftOffset": 77,
+        "topOffset": 118
+    },
     "message2": {
         "id": 2,
-        "content": "Hello world!",
-        "leftOffset": 427,
-        "topOffset": 260
-    },
-    "message3": {
-        "id": 3,
         "removing": null,
-        "content": "Hello world!fdsfsd",
-        "leftOffset": 193,
-        "topOffset": 167
+        "content": "Hello world!",
+        "leftOffset": 313,
+        "topOffset": 93
     }
 }
