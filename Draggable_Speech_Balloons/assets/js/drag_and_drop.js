@@ -21,13 +21,14 @@ function drop(event) {
 	var leftOffset = checkForOccurrenceInTheInterval(leftOffset, 0, maxAllowedWidth);
 	var topOffset = checkForOccurrenceInTheInterval(topOffset, 0, maxAllowedHeight);
 	
-	dragElem.css({
-		"left": leftOffset,
-		"top": topOffset
+	// Updating data of position of draggable elements only when server returns "success"
+	updatingJsonData({"id": selectedMesId, "leftOffset": leftOffset, "topOffset": topOffset},
+	 function() {
+	 	dragElem.css({
+			"left": leftOffset,
+			"top": topOffset
+		});
 	});
-
-	// Updating data of position of draggable elements
-	updatingJsonData(selectedMesId, undefined, leftOffset, topOffset);
 	
 	event.preventDefault();
 	return false;
@@ -41,11 +42,10 @@ function drag_over(event) {
 // Check whether numbers are in interval
 function checkForOccurrenceInTheInterval(number, minAllowed, maxAllowed) {
 
-	if(!(typeof number == "number" && typeof minAllowed == "number" && typeof maxAllowed == "number")) {
+	if(!dataTypeCheck({[typeof number]: "number",
+						[typeof minAllowed]: "number",
+						[typeof maxAllowed]: "number"})) {
 		console.log("Incorrect data");
-		console.log("number: " + number + "\ntype: " + typeof number +
-					"minAllowed: " + minAllowed + "\ntype: " + typeof minAllowed +
-					"maxAllowed: " + maxAllowed + "\ntype: " + typeof maxAllowed);
 		return;
 	}
 

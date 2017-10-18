@@ -1,40 +1,89 @@
 // Update jsonData when user edits or moves draggable divs 
-function updatingJsonData(id, content, leftOffset, topOffset, removing) {
+function updatingJsonData(data, functionOnSuccess) {
 
-	if(!((typeof parseInt(id) == "number" && parseInt(id) >= 0) &&
-	    (typeof content == "string" || typeof content == "undefined") &&
-	   ((typeof leftOffset == "number" && leftOffset >= 0) || typeof leftOffset == "undefined") &&
-	   ((typeof topOffset == "number" && topOffset >= 0) || typeof topOffset == "undefined"))
-	) {
+	if(!(dataTypeCheck({[typeof data]: "object"}))) {
 		console.log("Incorrect data");
-		console.log("id: " + id + " type: " + typeof id + 
-					"content: " + content + " type: " + typeof content + 
-					"leftOffset: " + leftOffset + " type: " + typeof leftOffset + 
-					"topOffset: " + topOffset + " type: " + typeof topOffset);
 		return;
 	}
 
-	var messageData = {
-		"id": id,
-		"content": content,
-		"leftOffset": leftOffset,
-		"topOffset": topOffset
-	};
-
-	if(removing) {
-		messageData.removing = true;
+	if(!(data["id"] >= 0)) {
+		console.log("Incorrect id");
+		return;
 	}
 
-	$.post("assets/php/data_save.php", messageData, function(data) {
-		console.log(data);
-	})
+	if(data["content"] == undefined && data["leftOffset"] != undefined && data["topOffset"] != undefined) {
+		if(!(data["leftOffset"] >= 0 && data["topOffset"] >= 0)) {
+			console.log("Incorrect data");
+			return;
+		}
+	}
+
+	$.post("assets/php/data_save.php", data)
 		.done(function() {
 		    console.log("Data save success");
+		    functionOnSuccess();
 		})
-		.fail(function() {
-		    console.log("Data save error");
+		.fail(function(xhr, event) {
+			errorLogs(xhr, event);
 		})
 		.always(function() {
-			console.log("Data save finished");
+			console.log("Request finished");
 		});
+}
+
+function dataTypeCheck(object) { // data - object o format {typeof data: required dataTypes...}
+	
+	for(dataType in object) {
+
+		var requiredType = object[dataType];
+
+		if(typeof requiredType == "object") { // if we have a choice of the required data types
+
+			var matchFound = false;
+			for(var i = 0; requiredType[i]; i++) {
+				if(dataType == requiredType[i]) {
+					var matchFound = true;
+					break;
+				}
+			}
+
+			if(matchFound) {
+				continue;
+			} else {
+				console.log("Incorrect data. " + dataType + ", required " + requiredType);
+				return false;
+			}
+
+		} else if (typeof requiredType == "string") { // if we have the only one required data type
+
+			if(dataType == requiredType) {
+				continue;
+			} else {
+				console.log("Incorrect data. " + dataType + ", required " + requiredType);
+				return false;
+			}
+		}
+	}
+	
+	return true;
+}
+
+function errorLogs(xhr, event) {
+	
+	console.log("Error");
+
+	if (xhr.status==0) {
+        console.log("Please Check Your Network.");
+    } else if(xhr.status == 404) {
+        console.log("Requested URL not found.");
+    } else if(xhr.status == 500) {
+        console.log("Internel Server Error.");
+    } else if(event == "parsererror") {
+        console.log("Parsing JSON Request failed.");
+    } else if(event == "timeout"){
+        console.log("Request Time out.");
+    } else {
+        console.log("Unknow Error.\n" + xhr.responseText);
+    }
+	
 }
