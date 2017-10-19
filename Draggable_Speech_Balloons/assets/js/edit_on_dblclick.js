@@ -24,7 +24,7 @@
     
         // Hiding the div and showing an input to allow editing the value.
         textBlock.dblclick(function() {
-            toggleVisiblity($(this), true);
+            toggleVisibility($(this), true);
         });
 
         // Hiding the input and showing the original div with entered text
@@ -45,10 +45,10 @@
         });
 
         textArea.blur(function(event) {
-            toggleVisiblity($(this), false);
+            toggleVisibility($(this), false);
         });
 
-        toggleVisiblity = function(element, editMode) {
+        toggleVisibility = function(element, editMode) {
 
             var textBlock, textArea;
 
@@ -90,15 +90,19 @@
                 // Delete message block if it's empty
                 if(textArea.val() == "") {
                     var removing = true;
-                    // Delete all elements until next draggable phrase
-                    textBlock.nextUntil(".draggable-phrase").remove().end().remove(); 
-                } else {
-                    // 
-                    textBlock.html(textArea.val());
                 }
 
                 // Updating data of content of draggable element
-                updatingJsonData(textBlock[0].id, textArea.val(), undefined, undefined, removing);
+                updatingJsonData({"id": textBlock[0].id, "content": textArea.val(),
+                 "removing": removing}, function() {
+                    // Delete or update information only when server returns "success"
+                    if(removing) {
+                        // Delete all elements until next draggable phrase
+                        textBlock.nextUntil(".draggable-phrase").remove().end().remove(); 
+                    } else {
+                        textBlock.html(textArea.val());
+                    }
+                });
             }
         };
     };
@@ -107,11 +111,10 @@
 
 function resizeArea(elem_id, maxHeight) {
 
-    if(!(typeof elem_id == "string" && typeof maxHeight == "number")) {
+    if(!dataTypeCheck({[typeof elem_id]: "string",
+                       [typeof maxHeight]: "number"})) {
         console.log("Incorrect data");
-        console.log("elem_id: " + elem_id + "\ntype: " + typeof elem_id +
-                    "\nmaxHeight: " + maxHeight + "\ntype: " + typeof maxHeight);
-        return false;
+        return;
     }
 
     var area = $("#" + elem_id);
@@ -151,9 +154,8 @@ function resizeArea(elem_id, maxHeight) {
 
 function textAreaCreating(id) {
 
-    if(!(typeof id == "string")) {
+    if(!dataTypeCheck({[typeof id]: "string"})) {
         console.log("Incorrect data");
-        console.log("id: " + id + "\ntype: " + typeof id);
         return;
     }
 
@@ -169,12 +171,10 @@ function textAreaCreating(id) {
 }
 
 function checkForSymbolsLimit(content, messageHeight, maxHeight) {
-
-    if(!(typeof content == "string" && typeof messageHeight == "number" && typeof maxHeight == "number")) {
+    if(!dataTypeCheck({[typeof content]: "string",
+                       [typeof messageHeight]: "number",
+                       [typeof maxHeight]: "number"})) {
         console.log("Incorrect data");
-        console.log("content: " + content + "\ntype: " + typeof content +
-                    "\nmessageHeight: " + messageHeight + "\ntype: " + typeof messageHeight +
-                    "\nmexHeight: " + maxHeight + "\ntype: " + typeof maxHeight);
         return;
     }
 
@@ -188,40 +188,31 @@ function checkForSymbolsLimit(content, messageHeight, maxHeight) {
 
 function checkForCorrectOffset(textarea, typeOfOffset, areaOffset, areaSideSize, parentSize) {
 
-    if(!(typeof textarea == "object" && typeof typeOfOffset == "string" && typeof areaOffset == "number"
-        && typeof areaSideSize == "number" && typeof parentSize == "number")) {
+    if(!dataTypeCheck({[typeof textarea]: "object",
+                       [typeof typeOfOffset]: "string",
+                       [typeof areaOffset]: "number",
+                       [typeof areaSideSize]: "number",
+                       [typeof parentSize]: "number"})) {
         console.log("Incorrect data");
-        console.log("textarea: " + textarea + "\ntype: " + typeof textarea +
-                    "typeOfOffset: " + typeOfOffset + "\ntype: " + typeof typeOfOffset + 
-                    "areaOffset: " + areaOffset + "\ntype: " + typeof areaOffset +
-                    "areaSideSize: " + areaSideSize + "\ntype: " + typeof areaSideSize +
-                    "parentSize: " + parentSize + "\ntype: " + typeof parentSize);
         return;
     }
 
     if(areaOffset + areaSideSize > parentSize) { 
+        
         var maxOffset = parentSize - areaSideSize;
 
-        textarea.css(typeOfOffset, maxOffset);
-        textarea.prev().css(typeOfOffset, maxOffset);
-
-        if(typeOfOffset == "left") {
-            updatingJsonData(textarea.prev()[0].id, undefined,  maxOffset, undefined);
-            return;
-        }
-
-        if(typeOfOffset == "top") {
-            updatingJsonData(textarea.prev()[0].id, undefined,  undefined, maxOffset);
-            return;
-        }
+        // Update [top]Offset or [left]Offset only if server returns "success"
+        updatingJsonData({"id": textarea.prev()[0].id, [typeOfOffset + "Offset"]: maxOffset}, function() {
+            textarea.css(typeOfOffset, maxOffset); 
+            textarea.prev().css(typeOfOffset, maxOffset); // here is a draggable div   
+        });
     }
 }
 
 function splitTextIntoLines(text) {
 
-    if(!(typeof text == "string")) {
+    if(!dataTypeCheck({[typeof text]: "string"})) {
         console.log("Incorrect data");
-        console.log("text: " + text + "\ntype: " + typeof text);
         return;
     }
 

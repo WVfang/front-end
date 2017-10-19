@@ -15,8 +15,6 @@
 		$updatedData["topOffset"] = intval($_POST["topOffset"]);
 	}
 
-	print_r($updatedData);
-
 	// Get data from json file
 	if(file_get_contents($dataStore)) {
 		$data = file_get_contents($dataStore);
