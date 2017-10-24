@@ -30,7 +30,7 @@ $(document).ready(function() {
 			// Add divs into drag-space, set their position, add listener and make them editable
 			displayData(data, dataKeys);
 		})
-		.fail(function() {
+		.fail(function(xhr, event) {
 			errorLogs(xhr, event);
 		})
 		.always(function() {

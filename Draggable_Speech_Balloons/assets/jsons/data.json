@@ -1,16 +1,9 @@
 {
-    "message0": {
-        "id": 0,
-        "removing": null,
-        "content": "Hello world!ffd sa.,fm dsaf dsaj kfldjs l;jafl ;skdj ;agj dsk;lajg dksa gjdsk jakj dsalg jsdlk jasldk jgldska j;gdk jasldkj glkas jd;lkja gksgdf gfgdsgdfgsdfgdfgsdgdfgfdsafdsfdfafd as",
-        "leftOffset": 173,
-        "topOffset": 188
-    },
     "message1": {
         "id": 1,
         "removing": null,
         "content": "Hello world!",
-        "leftOffset": 143,
-        "topOffset": 85
+        "leftOffset": 444,
+        "topOffset": 87
     }
 }

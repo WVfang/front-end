@@ -69,21 +69,26 @@ function dataTypeCheck(object) { // data - object o format {typeof data: require
 }
 
 function errorLogs(xhr, event) {
-	
+
 	console.log("Error");
 
 	if (xhr.status==0) {
         console.log("Please Check Your Network.");
+        alert("Please Check Your Network.");
     } else if(xhr.status == 404) {
         console.log("Requested URL not found.");
+        alert("Requested URL not found.");
     } else if(xhr.status == 500) {
         console.log("Internel Server Error.");
+        alert("Internel Server Error.");
     } else if(event == "parsererror") {
         console.log("Parsing JSON Request failed.");
+        alert("Parsing JSON Request failed.");
     } else if(event == "timeout"){
         console.log("Request Time out.");
+        alert("Request Time out.");
     } else {
         console.log("Unknow Error.\n" + xhr.responseText);
+        alert("Unknow Error.");
     }
-	
 }
