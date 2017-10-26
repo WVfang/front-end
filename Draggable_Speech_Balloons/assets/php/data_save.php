@@ -8,11 +8,11 @@
 		$updatedData["content"] = strip_tags($_POST["content"]);
 		$updatedData["content"] = htmlspecialchars($updatedData["content"]);
 	}
-	if(isset($_POST["leftOffset"])) {
-		$updatedData["leftOffset"] = intval($_POST["leftOffset"]);
+	if(isset($_POST["left"])) {
+		$updatedData["left"] = intval($_POST["left"]);
 	}
-	if(isset($_POST["topOffset"])) {
-		$updatedData["topOffset"] = intval($_POST["topOffset"]);
+	if(isset($_POST["top"])) {
+		$updatedData["top"] = intval($_POST["top"]);
 	}
 
 	// Get data from json file

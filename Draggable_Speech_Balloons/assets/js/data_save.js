@@ -6,22 +6,28 @@ function updatingJsonData(data, functionOnSuccess) {
 		return;
 	}
 
-	if(!(data["id"] >= 0)) {
+	if(!(data["id"] >= 0 || typeof data["id"] == "undefined")) {
 		console.log("Incorrect id");
 		return;
 	}
 
-	if(data["content"] == undefined && data["leftOffset"] != undefined && data["topOffset"] != undefined) {
-		if(!(data["leftOffset"] >= 0 && data["topOffset"] >= 0)) {
+	if(data["content"] == undefined && data["left"] != undefined && data["top"] != undefined) {
+		if(!(data["left"] >= 0 && data["top"] >= 0)) {
 			console.log("Incorrect data");
 			return;
 		}
 	}
 
-	$.post("assets/php/data_save.php", data)
-		.done(function() {
-		    console.log("Data save success");
-		    functionOnSuccess();
+	$.post("assets/php/psql_data_save.php", data)
+		.done(function(json) {
+
+			console.log("Data save success");
+
+			if(json) {
+				var lastId = JSON.parse(json)["max"];
+			}
+
+		    functionOnSuccess(lastId);
 		})
 		.fail(function(xhr, event) {
 			errorLogs(xhr, event);

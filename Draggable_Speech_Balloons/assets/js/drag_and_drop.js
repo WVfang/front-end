@@ -11,22 +11,22 @@ function drag_start(event) {
 function drop(event) {
 	var offset = event.dataTransfer.getData("text/plain").split(',');
 
-	var leftOffset = event.clientX + parseInt(offset[0], RADIX_10);
-	var topOffset = event.clientY + parseInt(offset[1], RADIX_10);
+	var left = event.clientX + parseInt(offset[0], RADIX_10);
+	var top = event.clientY + parseInt(offset[1], RADIX_10);
 
 	// Limits of left and top offset those depend on wrapper's(img) width/height and draggable element's widht/height
 	var dragElem = $("#" + selectedMesId);
 	var maxAllowedWidth = $("#drag-space").width() - dragElem.outerWidth();
 	var maxAllowedHeight = $("#drag-space").height() - dragElem.outerHeight() - SPACE_OF_MESSAGE_TAIL; 
-	var leftOffset = checkForOccurrenceInTheInterval(leftOffset, 0, maxAllowedWidth);
-	var topOffset = checkForOccurrenceInTheInterval(topOffset, 0, maxAllowedHeight);
+	var left = checkForOccurrenceInTheInterval(left, 0, maxAllowedWidth);
+	var top = checkForOccurrenceInTheInterval(top, 0, maxAllowedHeight);
 	
 	// Updating data of position of draggable elements only when server returns "success"
-	updatingJsonData({"id": selectedMesId, "leftOffset": leftOffset, "topOffset": topOffset},
+	updatingJsonData({"id": selectedMesId, "left": left, "top": top},
 	 function() {
 	 	dragElem.css({
-			"left": leftOffset,
-			"top": topOffset
+			"left": left,
+			"top": top
 		});
 	});
 	
