@@ -1,0 +1,114 @@
+I 2017-10-26 23:35:55:401 server.cc(86) Starting WebDriver server on port: '5555' on host: ''
+I 2017-10-26 23:35:55:402 IEServer.cpp(33) Driver version: 3.6.0.0 (64-bit)
+D 2017-10-26 23:35:55:402 server.cc(148) Civetweb ACL is -0.0.0.0/0,+127.0.0.1
+D 2017-10-26 23:37:16:599 server.cc(281) Command: GET /status {}
+D 2017-10-26 23:37:16:600 server.cc(338) Response: {"value":{"build":{"version":"3.6.0.0 (64-bit)"},"message":"Ready to create session","os":{"arch":"x64","name":"windows","version":"6.1.7601.18015 (win7sp1_gdr.121129-1432)"},"ready":true}}
+
+D 2017-10-26 23:37:17:411 server.cc(281) Command: POST /session {
+  "desiredCapabilities": {
+    "ensureCleanSession": true,
+    "se:ieOptions": {},
+    "browserName": "internet explorer",
+    "version": "",
+    "platform": "WINDOWS"
+  },
+  "requiredCapabilities": {},
+  "capabilities": {
+    "desiredCapabilities": {
+      "ensureCleanSession": true,
+      "se:ieOptions": {},
+      "browserName": "internet explorer",
+      "version": "",
+      "platform": "WINDOWS"
+    },
+    "requiredCapabilities": {},
+    "alwaysMatch": {},
+    "firstMatch": [
+      {
+        "se:ieOptions": {},
+        "browserName": "internet explorer"
+      }
+    ]
+  }
+}
+D 2017-10-26 23:37:17:411 IESession.cpp(53) Mutex acquired for session initalization
+D 2017-10-26 23:37:17:428 IESession.cpp(109) Releasing session initialization mutex
+D 2017-10-26 23:37:17:428 command.cc(36) Raw JSON command: { "name" : "newSession", "locator" : { }, "parameters" : {
+  "desiredCapabilities": {
+    "ensureCleanSession": true,
+    "se:ieOptions": {},
+    "browserName": "internet explorer",
+    "version": "",
+    "platform": "WINDOWS"
+  },
+  "requiredCapabilities": {},
+  "capabilities": {
+    "desiredCapabilities": {
+      "ensureCleanSession": true,
+      "se:ieOptions": {},
+      "browserName": "internet explorer",
+      "version": "",
+      "platform": "WINDOWS"
+    },
+    "requiredCapabilities": {},
+    "alwaysMatch": {},
+    "firstMatch": [
+      {
+        "se:ieOptions": {},
+        "browserName": "internet explorer"
+      }
+    ]
+  }
+} }
+D 2017-10-26 23:37:17:429 CommandHandlers\NewSessionCommandHandler.cpp(46) Found W3C capabilities structure
+D 2017-10-26 23:37:17:429 CommandHandlers\NewSessionCommandHandler.cpp(194) Found alwaysMatch in capabilities
+D 2017-10-26 23:37:17:429 CommandHandlers\NewSessionCommandHandler.cpp(505) Validating capabilities object
+D 2017-10-26 23:37:17:429 CommandHandlers\NewSessionCommandHandler.cpp(505) Validating capabilities object
+D 2017-10-26 23:37:17:429 CommandHandlers\NewSessionCommandHandler.cpp(535) Found browserNamecapability. Validating value type is string.
+D 2017-10-26 23:37:17:429 CommandHandlers\NewSessionCommandHandler.cpp(794) Found proxycapability. Validating value type is object.
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(146) Ignoring Protected Mode Settings: 0
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(149) Checking validity of Protected Mode settings.
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(1061) Detected IE version: 11, Windows version supports Protected Mode: 1
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(1152) Found Protected Mode setting value of 0 for zone 1
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(1152) Found Protected Mode setting value of 0 for zone 2
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(1152) Found Protected Mode setting value of 0 for zone 3
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(1152) Found Protected Mode setting value of 0 for zone 4
+D 2017-10-26 23:37:17:430 BrowserFactory.cpp(152) Has Valid Protected Mode Settings: 1
+D 2017-10-26 23:37:17:440 BrowserFactory.cpp(248) Starting IE using the IELaunchURL API
+D 2017-10-26 23:37:18:722 BrowserFactory.cpp(202) IE launched successfully with process ID 7800
+D 2017-10-26 23:37:18:722 BrowserFactory.cpp(208) Process with ID 7800 is executing iexplore.exe
+D 2017-10-26 23:37:18:722 BrowserFactory.cpp(375) Using Active Accessibility to find IWebBrowser2 interface
+D 2017-10-26 23:37:20:222 BrowserFactory.cpp(434) Found window handle 0000000000050504 for window with class 'Internet Explorer_Server' belonging to process with id 7800
+D 2017-10-26 23:37:20:330 BrowserFactory.cpp(396) Ignoring zoom setting: 0
+D 2017-10-26 23:37:20:429 BrowserFactory.cpp(694) Browser zoom level is 100%
+I 2017-10-26 23:37:20:431 IECommandExecutor.cpp(654) Persistent hovering set to: 1
+D 2017-10-26 23:37:20:431 ProxyManager.cpp(113) Using existing system proxy settings.
+D 2017-10-26 23:37:20:444 server.cc(338) Response: {"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"internet explorer","browserVersion":"11","pageLoadStrategy":"normal","platformName":"windows","se:ieOptions":{"browserAttachTimeout":0,"elementScrollBehavior":0,"enablePersistentHover":true,"ie.browserCommandLineSwitches":"","ie.ensureCleanSession":false,"ie.fileUploadDialogTimeout":3000,"ie.forceCreateProcessApi":false,"ignoreProtectedModeSettings":false,"ignoreZoomSetting":false,"initialBrowserUrl":"http://localhost:5555/","nativeEvents":true,"requireWindowFocus":false},"setWindowRect":true},"sessionId":"ef2f455b-9d0a-4e2c-8834-ebac2529a01d"}}
+
+D 2017-10-26 23:37:20:630 server.cc(281) Command: POST /session/ef2f455b-9d0a-4e2c-8834-ebac2529a01d/url {"url":"http://toolsqa.wpengine.com"}
+D 2017-10-26 23:37:20:630 command.cc(36) Raw JSON command: { "name" : "get", "locator" : { "sessionid" : "ef2f455b-9d0a-4e2c-8834-ebac2529a01d" }, "parameters" : {"url":"http://toolsqa.wpengine.com"} }
+D 2017-10-26 23:37:20:630 IECommandExecutor.cpp(543) No alert handle is found
+D 2017-10-26 23:37:20:632 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:20:633 Browser.cpp(484) Browser ReadyState is not at least '4'; it was 1
+D 2017-10-26 23:37:20:834 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:20:834 Browser.cpp(464) Browser busy property is true.
+D 2017-10-26 23:37:21:035 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:21:035 Browser.cpp(464) Browser busy property is true.
+D 2017-10-26 23:37:21:170 server.cc(281) Command: GET /favicon.ico {}
+D 2017-10-26 23:37:21:170 server.cc(338) Response: { "error" : "unknown method", "message" : "Command not found: GET /favicon.ico" }
+D 2017-10-26 23:37:21:236 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:21:236 Browser.cpp(464) Browser busy property is true.
+D 2017-10-26 23:37:21:437 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:21:437 Browser.cpp(464) Browser busy property is true.
+D 2017-10-26 23:37:21:638 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:21:642 Browser.cpp(464) Browser busy property is true.
+D 2017-10-26 23:37:21:843 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:23:963 Browser.cpp(464) Browser busy property is true.
+D 2017-10-26 23:37:24:163 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:29:182 Browser.cpp(484) Browser ReadyState is not at least '4'; it was 3
+D 2017-10-26 23:37:29:210 ElementRepository.cpp(113) Refreshing managed element cache. Found 0 to remove from cache.
+D 2017-10-26 23:37:29:382 Browser.cpp(448) Navigate Events Completed.
+D 2017-10-26 23:37:29:471 Browser.cpp(508) Waiting for document to complete...
+D 2017-10-26 23:37:29:888 Browser.cpp(513) Not in navigating state
+D 2017-10-26 23:37:29:893 server.cc(338) Response: {"value":null}
+
